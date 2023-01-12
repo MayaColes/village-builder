@@ -1,0 +1,13 @@
+import { Component, Input } from '@angular/core';
+import { CraftableResource, Resource } from 'src/app/data-interfaces';
+
+@Component({
+  selector: 'resource-panel',
+  templateUrl: './resource-panel.component.html',
+  styleUrls: ['./resource-panel.component.css']
+})
+export class ResourcePanelComponent {
+  @Input() resources : Resource[];
+
+  @Input() craftableResources : CraftableResource[];
+}

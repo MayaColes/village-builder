@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CraftableResource, Resource } from 'src/app/data-interfaces';
+import { Resource } from 'src/app/data-interfaces';
 
 @Component({
   selector: 'resource-label',
