@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CraftableResource, Resource } from 'src/app/data-interfaces';
 
 @Component({
   selector: 'resource-label',
@@ -6,7 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./resource-label.component.css']
 })
 export class ResourceLabelComponent {
-  @Input() name = '';
-  @Input() amount = 0;
-  @Input() color = 'gray'
+  @Input() resource : Resource;
 }
