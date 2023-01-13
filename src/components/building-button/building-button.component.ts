@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Building } from 'src/app/data-interfaces';
 
 @Component({
   selector: 'building-button',
@@ -6,6 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./building-button.component.css']
 })
 export class BuildingButtonComponent {
-  @Input() name = '';
-  @Input() numberBuilt : number = 0;
+  @Input() building : Building;
+
+  @Output() getBuilding = new EventEmitter<void>();
+
+  doGetBuilding() {
+    this.getBuilding.emit();
+  }
 }
