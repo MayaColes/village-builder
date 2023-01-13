@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BuildingButtonComponent } from './building-button/building-button.component';
 import { ResourceLabelComponent } from './resource-label/resource-label.component';
-import { EventDisplayComponent } from './event-display/event-display.component';
+import { EventPanelComponent } from './event-panel/event-panel.component';
 import { ResourcePanelComponent } from './resource-panel/resource-panel.component';
 import { CraftableResourceLabelComponent } from './craftable-resource-label/craftable-resource-label.component';
+import { BuildingPanelComponent } from './building-panel/building-panel.component';
 
 
 
@@ -12,9 +13,10 @@ import { CraftableResourceLabelComponent } from './craftable-resource-label/craf
   declarations: [
     BuildingButtonComponent,
     ResourceLabelComponent,
-    EventDisplayComponent,
+    EventPanelComponent,
     ResourcePanelComponent,
-    CraftableResourceLabelComponent
+    CraftableResourceLabelComponent,
+    BuildingPanelComponent
   ],
   imports: [
     CommonModule,
@@ -22,8 +24,9 @@ import { CraftableResourceLabelComponent } from './craftable-resource-label/craf
   exports: [
     BuildingButtonComponent,
     ResourceLabelComponent,
-    EventDisplayComponent,
-    ResourcePanelComponent
+    EventPanelComponent,
+    ResourcePanelComponent,
+    BuildingPanelComponent
   ]
 })
 export class ComponentsModule { }
