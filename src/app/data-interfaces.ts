@@ -12,8 +12,8 @@ export interface Building {
     dependancy: number,
     identifier: string,
     resourcesRequired: string[],
-    price: string[],
-    resourceCraftable: string[]
+    price: number[],
+    resourceCraftable: boolean[]
 }
 
 export interface Civilization {
@@ -112,5 +112,4 @@ export interface Effect {
     effectsWhatObjectType: string,
     effectsWhatObject: string,
     effectsWhatResource: string,
-    stringifiedEffect: string,
 }

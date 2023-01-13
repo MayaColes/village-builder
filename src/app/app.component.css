@@ -1,0 +1,19 @@
+.container {
+    flex-direction: row;
+    display: flex;
+}
+
+.resourcePanel {
+    width: 25%;
+    min-height: 100vh;
+}
+
+.buildingPanel {
+    width: 50%;
+    min-height: 100vh;
+}
+
+.eventPanel {
+    width: 25%;
+    min-height: 100vh;
+}
