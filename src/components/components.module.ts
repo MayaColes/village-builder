@@ -6,6 +6,7 @@ import { EventPanelComponent } from './event-panel/event-panel.component';
 import { ResourcePanelComponent } from './resource-panel/resource-panel.component';
 import { CraftableResourceLabelComponent } from './craftable-resource-label/craftable-resource-label.component';
 import { BuildingPanelComponent } from './building-panel/building-panel.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,6 +21,7 @@ import { BuildingPanelComponent } from './building-panel/building-panel.componen
   ],
   imports: [
     CommonModule,
+    FormsModule,
   ],
   exports: [
     BuildingButtonComponent,
