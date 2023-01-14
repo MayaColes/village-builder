@@ -1,0 +1,32 @@
+.tooltipPadding {
+    background: white;
+    padding: 5px;
+    border: solid gray;
+    border-width: 1px;
+    border-radius: 5px;
+    position: absolute;
+    width: 300px;
+    display: flex;
+}
+
+.secondaryTooltip {
+    float: right;
+    font-size: 12px
+}
+
+.widthFormat {
+    width: 100%;
+}
+
+.line {
+    border: solid gray;
+    border-width: 1px 0px 0px 0px;
+}
+
+.mediumSpace {
+    padding-top: 10px;
+}
+
+.smallSpace {
+    padding-top: 5px;
+}

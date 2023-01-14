@@ -7,6 +7,8 @@ import { ResourcePanelComponent } from './resource-panel/resource-panel.componen
 import { CraftableResourceLabelComponent } from './craftable-resource-label/craftable-resource-label.component';
 import { BuildingPanelComponent } from './building-panel/building-panel.component';
 import { FormsModule } from '@angular/forms';
+import { TooltipComponent } from './tooltip/tooltip.component';
+import { TooltipPriceInfoComponent } from './tooltip-price-info/tooltip-price-info.component';
 
 
 
@@ -17,18 +19,19 @@ import { FormsModule } from '@angular/forms';
     EventPanelComponent,
     ResourcePanelComponent,
     CraftableResourceLabelComponent,
-    BuildingPanelComponent
+    BuildingPanelComponent,
+    TooltipComponent,
+    TooltipPriceInfoComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
   ],
   exports: [
-    BuildingButtonComponent,
-    ResourceLabelComponent,
     EventPanelComponent,
     ResourcePanelComponent,
-    BuildingPanelComponent
+    BuildingPanelComponent,
+    TooltipComponent
   ]
 })
 export class ComponentsModule { }

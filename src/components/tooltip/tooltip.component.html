@@ -1,0 +1,20 @@
+<div class="tooltipPadding">
+    <div *ngIf="type !== 'resource'" class="widthFormat">
+        <div>{{ gameObject.toolTipText }}</div>
+        <div class="smallSpace"></div>
+        <div class="line"></div>
+        <div class="mediumSpace"></div>
+        <div *ngFor="let resourceRequired of gameObject.resourcesRequired;">
+            <tooltip-price-info [resource]="findResource(resourceRequired.name)"
+                                [price]="resourceRequired.price"
+                                [allResources]="resources">
+            </tooltip-price-info>
+        </div>
+        <div *ngIf="gameObject.secondaryToolTip">
+            <div class="mediumSpace"></div>
+            <div class="line"></div>
+            <div class="smallSpace"></div>
+            <div class="secondaryTooltip">{{ gameObject.secondaryToolTip }}</div>
+        </div>
+    </div>
+</div>

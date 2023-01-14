@@ -1,0 +1,16 @@
+<div class="resource">
+    <div class="priceRow" >
+        <div>{{ resource.name }}:</div>
+        <div>{{ price }}</div>
+    </div>
+    <div *ngIf="isCraftable">
+        <div *ngFor="let resourceRequired of resourcesToCraft" class="craftResourceRow">
+            <div class="arrowPadding">> </div>
+            <tooltip-price-info [resource]="findResource(resourceRequired.name)"
+                                [allResources]="allResources" 
+                                [price]="resourceRequired.price"
+                                class="craftResource">
+            </tooltip-price-info>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+.priceRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.craftResourceRow {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    float: right;
+}
+
+.craftResource {
+    width: 100%;
+}
+
+.resource {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.arrowPadding {
+    padding-right: 5px;
+}
