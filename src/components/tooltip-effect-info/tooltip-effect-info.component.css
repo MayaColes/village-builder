@@ -1,0 +1,11 @@
+.effect {
+    width: 100%;
+    color: gray;
+    font-size: 14px;
+}
+
+.effectRow {
+    display: flex;
+    flex-direction: row;
+    
+}

@@ -9,6 +9,7 @@ import { BuildingPanelComponent } from './building-panel/building-panel.componen
 import { FormsModule } from '@angular/forms';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipPriceInfoComponent } from './tooltip-price-info/tooltip-price-info.component';
+import { TooltipEffectInfoComponent } from './tooltip-effect-info/tooltip-effect-info.component';
 
 
 
@@ -21,7 +22,8 @@ import { TooltipPriceInfoComponent } from './tooltip-price-info/tooltip-price-in
     CraftableResourceLabelComponent,
     BuildingPanelComponent,
     TooltipComponent,
-    TooltipPriceInfoComponent
+    TooltipPriceInfoComponent,
+    TooltipEffectInfoComponent
   ],
   imports: [
     CommonModule,

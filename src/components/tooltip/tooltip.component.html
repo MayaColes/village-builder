@@ -1,6 +1,6 @@
 <div class="tooltipPadding">
     <div *ngIf="type !== 'resource'" class="widthFormat">
-        <div>{{ gameObject.toolTipText }}</div>
+        <div class="tooltip">{{ gameObject.toolTipText }}</div>
         <div class="smallSpace"></div>
         <div class="line"></div>
         <div class="mediumSpace"></div>
@@ -10,9 +10,15 @@
                                 [allResources]="resources">
             </tooltip-price-info>
         </div>
-        <div *ngIf="gameObject.secondaryToolTip">
+        <div *ngIf="gameObject.effects.length">
             <div class="mediumSpace"></div>
             <div class="line"></div>
+            <div class="smallSpace"></div>
+            <div *ngFor="let effect of gameObject.effects">
+                <tooltip-effect-info [effect]="effect"></tooltip-effect-info>
+            </div>
+        </div>
+        <div *ngIf="gameObject.secondaryToolTip">
             <div class="smallSpace"></div>
             <div class="secondaryTooltip">{{ gameObject.secondaryToolTip }}</div>
         </div>

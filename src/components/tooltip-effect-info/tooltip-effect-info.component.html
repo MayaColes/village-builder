@@ -1,0 +1,24 @@
+<div class="effect">
+    <div *ngIf="effect.type === 'maximum'" class="effectRow">
+        <span>Maximum {{ effect.object }}: <span>{{ effect.amount }}</span></span>
+    </div>
+    <div *ngIf="effect.type === 'production'" class="effectRow">
+        <span>
+            {{ effect.object }} 
+            <span *ngIf="effect.resource">{{ effect.resource }} </span>
+            <span *ngIf="effect.amount > 0">Production: <span>{{ effect.amount }}/sec</span></span>
+            <span *ngIf="effect.amount < 0">Consumption: <span>{{ effect.amount }}/sec</span></span>
+        </span>
+        
+    </div>
+    <div *ngIf="effect.type === 'bonus'" class="effectRow">
+        <span>
+            {{ effect.object }}
+            <span *ngIf="effect.resource">'s {{ effect.resource }}</span>
+            <span> Bonus: <span>{{ effect.amount * 100 }}%</span></span>
+        </span>
+    </div>
+    <div *ngIf="effect.type === 'craftBonus'" class="effectRow">
+        <span>Craft Effectiveness: <span> {{ effect.amount * 100 }}%</span></span>
+    </div>
+</div>

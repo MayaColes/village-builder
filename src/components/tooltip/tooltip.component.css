@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.tooltip {
+    color: gray;
+}
+
 .secondaryTooltip {
     float: right;
     font-size: 12px
