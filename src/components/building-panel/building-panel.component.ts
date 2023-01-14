@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Building } from 'src/app/data-interfaces';
+import { Building, CraftableResource, Resource } from 'src/app/data-interfaces';
 
 @Component({
   selector: 'building-panel',
@@ -8,4 +8,12 @@ import { Building } from 'src/app/data-interfaces';
 })
 export class BuildingPanelComponent {
   @Input() buildings : Building[];
+
+  @Input() resources : Resource[];
+
+  @Input() craftableResources : CraftableResource[];
+
+  getAllResources(){
+    return [...this.resources, ...this.craftableResources]
+  }
 }

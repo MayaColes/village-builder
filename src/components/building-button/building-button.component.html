@@ -1,1 +1,2 @@
-<button class="button" (click)="doGetBuilding()">{{ building.name }} ({{ building.numberBuilt }})</button>
+<button class="button" (mouseenter)="showTooltip = true" (mouseleave)="showTooltip = false" (click)="doAddBuilding()">{{ building.name }} ({{ building.numberBuilt }})</button>
+<tooltip *ngIf="showTooltip" [gameObject]="building" type="buildable" [resources]="allResources"></tooltip>

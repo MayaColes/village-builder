@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Building } from 'src/app/data-interfaces';
+import { Building, CraftableResource, Resource } from 'src/app/data-interfaces';
 
 @Component({
   selector: 'building-button',
@@ -9,9 +9,13 @@ import { Building } from 'src/app/data-interfaces';
 export class BuildingButtonComponent {
   @Input() building : Building;
 
-  @Output() getBuilding = new EventEmitter<void>();
+  @Input() allResources : (Resource | CraftableResource)[]
 
-  doGetBuilding() {
-    this.getBuilding.emit();
+  @Output() addBuilding = new EventEmitter<void>();
+
+  showTooltip = false;
+
+  doAddBuilding() {
+    this.addBuilding.emit();
   }
 }

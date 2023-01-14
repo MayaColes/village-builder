@@ -1,5 +1,8 @@
 <div class="container">
     <div *ngFor="let building of buildings; let i = index;">
-        <building-button [ngClass]="{'leftButton': i % 2 == 0, 'rightButton': i % 2 == 1, 'buttonFormat': true}" [building]="building"></building-button>
+        <building-button [ngClass]="{'leftButton': i % 2 == 0, 'rightButton': i % 2 == 1, 'buttonFormat': true}"
+                         [allResources]="getAllResources()"
+                         [building]="building">
+        </building-button>
     </div>
 </div>
