@@ -39,6 +39,7 @@ export interface Resource {
     name: string,
     defaultMaximum: number,
     color: string,
+    currentProduction?: number,
     maximum?: number,
     amount?: number,
     isVisible?: boolean
@@ -67,7 +68,6 @@ export interface Researchable {
     dependancyPos: number,
     toolTipText: string,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
-    dependency?: Researchable | undefined,
     isResearched?: boolean,
     isVisible?: boolean,
 }
@@ -99,5 +99,5 @@ export interface Effect {
     objectType: string,
     object: string,
     resource?: string,
-    effectAmountWithBonus?: number,
+    bonus?: number,
 }
