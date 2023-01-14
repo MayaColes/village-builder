@@ -7,10 +7,7 @@ export interface Building {
     isEnablable: boolean,
     hasScienceDependancy: boolean,
     dependancy: number,
-    identifier: string,
-    resourcesRequired: string[],
-    price: number[],
-    resourceCraftable: boolean[],
+    resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
     numberBuilt?: number,
     numberEnabled?: number,
     isVisible?: boolean,
@@ -42,7 +39,6 @@ export interface Resource {
     name: string,
     defaultMaximum: number,
     color: string,
-    identifier: string,
     maximum?: number,
     amount?: number,
     isVisible?: boolean
@@ -50,13 +46,10 @@ export interface Resource {
 
 export interface CraftableResource {
     name: string,
-    identifier: string,
     toolTipText: string,
     dependancy: number,
     hasScienceDependancy: boolean,
-    resourcesRequired: string[],
-    price: number[],
-    resourceCraftable: boolean[],
+    resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
     amount?: number,
     isVisible?: boolean,
 }
@@ -64,7 +57,6 @@ export interface CraftableResource {
 export interface Job {
     name: string,
     toolTipText: string,
-    identifier: string,
     effects: Effect[]
     numberWorking?: number,
     isVisible?: boolean
@@ -72,12 +64,9 @@ export interface Job {
 
 export interface Researchable {
     name: string,
-    identifier: string,
     dependancyPos: number,
     toolTipText: string,
-    resourcesRequired: string[],
-    price: number[],
-    resourceCraftable: boolean[],
+    resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
     dependency?: Researchable | undefined,
     isResearched?: boolean,
     isVisible?: boolean,
@@ -85,14 +74,11 @@ export interface Researchable {
 
 export interface Upgrade {
     name: string,
-    identifier: string,
     dependancy: number,
     toolTipText: string,
     effects: Effect[],
     hasScienceDependancy: boolean,
-    resourcesRequired: string[],
-    price: number[],
-    resourceCraftable: boolean[],
+    resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
     isVisible?: boolean,
     isResearched?: boolean
 }
@@ -108,10 +94,10 @@ export interface Spell {
 }
 
 export interface Effect {
-    typeOfEffect: string,
-    effectAmount: number,
-    effectsWhatObjectType: string,
-    effectsWhatObject: string,
-    effectsWhatResource: string,
+    type: string,
+    amount: number,
+    objectType: string,
+    object: string,
+    resource?: string,
     effectAmountWithBonus?: number,
 }

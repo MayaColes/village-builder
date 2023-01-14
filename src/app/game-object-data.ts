@@ -7,27 +7,19 @@ export let buildings : Building[] = [
       "secondaryToolTip": "Nice and cold :)",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 2.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "B",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 2.0,
+          "objectType": "resource",
+          "object": "Bears"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": -1,
-      "name": "Igloo",
-      "identifier": "i",
+      "name": "Ice Hut",
       "resourcesRequired": [
-        "I"
+        {name: 'Ice', price: 10, isCraftable: false},
       ],
-      "price": [
-        10.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 1.25,
@@ -35,62 +27,46 @@ export let buildings : Building[] = [
       "secondaryToolTip": "No snacking",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.73,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "b",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.73,
+          "objectType": "resource",
+          "object": "Berries"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": -1,
       "name": "Berry Field",
-      "identifier": "b",
       "resourcesRequired": [
-        "b"
+        {name: 'Berries', price: 10, isCraftable: false},
       ],
-      "price": [
-        10.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 1.25,
       "toolTipText": "Libraries can be used to store science. They also provide a bonus to your science production.",
-      "secondaryToolTip": "What are these squiggly marks?",
+      "secondaryToolTip": "What are these strange markings?",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 250.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "s",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 250.0,
+          "objectType": "resource",
+          "object": "Science"
         },
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "r",
-          "effectsWhatResource": "s"
+          "type": "bonus",
+          "amount": 0.1,
+          "objectType": "job",
+          "object": "Researcher",
+          "resource": "Science"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": -1,
       "name": "Library",
-      "identifier": "l",
       "resourcesRequired": [
-        "w"
+        {name: 'Wood', price: 20, isCraftable: false},
       ],
-      "price": [
-        20.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 1.15,
@@ -98,34 +74,27 @@ export let buildings : Building[] = [
       "secondaryToolTip": "What\u0027s mine is mine and what\u0027s yours is also mine.",
       "effects": [
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.2,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "S"
+          "type": "bonus",
+          "amount": 0.2,
+          "objectType": "job",
+          "object": "Miner",
+          "resource": "Stone"
         },
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.05,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "o"
+          "type": "bonus",
+          "amount": 0.05,
+          "objectType": "job",
+          "object": "Miner",
+          "resource": "Ore"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 3,
       "name": "Mine",
-      "identifier": "m",
       "resourcesRequired": [
-        "w"
+        {name: 'Wood', price: 50, isCraftable: false},
       ],
-      "price": [
-        50.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 2.5,
@@ -133,41 +102,31 @@ export let buildings : Building[] = [
       "secondaryToolTip": "So warm...",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 1.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "W",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 1.0,
+          "objectType": "resource",
+          "object": "Water"
         },
         {
-          "typeOfEffect": "-",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "w",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -0.1,
+          "objectType": "resource",
+          "object": "Wood"
         },
         {
-          "typeOfEffect": "-",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "I",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -0.1,
+          "objectType": "resource",
+          "object": "Ice"
         }
       ],
       "isEnablable": true,
       "hasScienceDependancy": true,
       "dependancy": -1,
       "name": "Bonfire",
-      "identifier": "B",
       "resourcesRequired": [
-        "w"
+        {name: 'Wood', price: 10, isCraftable: false},
       ],
-      "price": [
-        10.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 1.15,
@@ -175,180 +134,138 @@ export let buildings : Building[] = [
       "secondaryToolTip": "I wonder what they do up there?",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 20.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 20.0,
+          "objectType": "resource",
+          "object": "Magic"
         },
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.06,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "S",
-          "effectsWhatResource": "m"
+          "type": "bonus",
+          "amount": 0.06,
+          "objectType": "job",
+          "object": "Sorcerer",
+          "resource": "Magic"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 6,
       "name": "Tower",
-      "identifier": "t",
+
       "resourcesRequired": [
-        "w",
-        "S"
+        {name: 'Wood', price: 30, isCraftable: false},
+        {name: 'Stone', price: 50, isCraftable: false},
       ],
-      "price": [
-        30.0,
-        50.0
-      ],
-      "resourceCraftable": [
-        false,
-        false
-      ]
     },
     {
       "increaseRatio": 1.5,
       "toolTipText": "Increase your resource limits.",
-      "secondaryToolTip": "Don\u0027t organize your stuff, just hide it behind walls.",
+      "secondaryToolTip": "Don't organize stuff, just hide it behind walls",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 1000.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "b",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 1000.0,
+          "objectType": "resource",
+          "object": "Berries"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 350.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "w",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 350.0,
+          "objectType": "resource",
+          "object": "Wood"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 75.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "i",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 75.0,
+          "objectType": "resource",
+          "object": "Iron"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 350.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "I",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 350.0,
+          "objectType": "resource",
+          "object": "Ice"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 600.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "S",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 600.0,
+          "objectType": "resource",
+          "object": "Stone"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 50.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "o",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 50.0,
+          "objectType": "resource",
+          "object": "Ore"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 1,
       "name": "Storage Shed",
-      "identifier": "s",
       "resourcesRequired": [
-        "w"
+        {name: 'Wood', price: 30, isCraftable: false},
       ],
-      "price": [
-        30.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 1.15,
       "toolTipText": "Consumes wood and ore to produce iron.",
-      "secondaryToolTip": "I\u0027m smeelltiing!!",
+      "secondaryToolTip": "I'm smeelltiing!!",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "I",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.1,
+          "objectType": "resource",
+          "object": "Iron"
         },
         {
-          "typeOfEffect": "-",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "w",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -0.1,
+          "objectType": "resource",
+          "object": "Wood"
         },
         {
-          "typeOfEffect": "-",
-          "effectAmount": 0.3,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "o",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -0.3,
+          "objectType": "resource",
+          "object": "Ore"
         }
       ],
       "isEnablable": true,
       "hasScienceDependancy": true,
       "dependancy": 4,
       "name": "Smeltery",
-      "identifier": "S",
       "resourcesRequired": [
-        "S"
+        {name: 'Stone', price: 250, isCraftable: false},
       ],
-      "price": [
-        250.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "increaseRatio": 1.25,
       "toolTipText": "Improves your science limit and production.",
-      "secondaryToolTip": "I just nap here and it looks like i\u0027m learning.",
+      "secondaryToolTip": "At least calculus hasn't been discovered yet...",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 500.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "s",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 500.0,
+          "objectType": "resource",
+          "object": "Science"
         },
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.2,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "r",
-          "effectsWhatResource": "s"
+          "type": "bonus",
+          "amount": 0.2,
+          "objectType": "job",
+          "object": "Researcher",
+          "resource": "Science"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 5,
       "name": "School",
-      "identifier": "c",
       "resourcesRequired": [
-        "w",
-        "S"
+        {name: 'Wood', price: 100, isCraftable: false},
+        {name: 'Stone', price: 120, isCraftable: false},
       ],
-      "price": [
-        100.0,
-        120.0
-      ],
-      "resourceCraftable": [
-        false,
-        false
-      ]
     },
     {
       "increaseRatio": 1.2,
@@ -356,130 +273,93 @@ export let buildings : Building[] = [
       "secondaryToolTip": "I made a birdhouse!",
       "effects": [
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.06,
-          "effectsWhatObjectType": "e",
-          "effectsWhatObject": "!",
-          "effectsWhatResource": "!"
+          "type": "craftBonus",
+          "amount": 0.06,
+          "objectType": "",
+          "object": ""
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 7,
-      "name": "Tinkerer\u0027s Station",
-      "identifier": "T",
+      "name": "Tinkerer's Station",
       "resourcesRequired": [
-        "w",
-        "S"
+        {name: 'Wood', price: 50, isCraftable: false},
+        {name: 'Stone', price: 200, isCraftable: false},
       ],
-      "price": [
-        50.0,
-        200.0
-      ],
-      "resourceCraftable": [
-        false,
-        false
-      ]
     },
     {
       "increaseRatio": 1.15,
-      "toolTipText": "You can now get clean water from the ground.",
+      "toolTipText": "Get clean water from the ground",
       "secondaryToolTip": "Well, well, well, what do we have here?",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 50.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "W",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 50.0,
+          "objectType": "resource",
+          "object": "Water"
         },
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.7,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "W",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.7,
+          "objectType": "resource",
+          "object": "Water"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 7,
       "name": "Well",
-      "identifier": "w",
       "resourcesRequired": [
-        "S",
-        "b"
+        {name: 'Stone', price: 300, isCraftable: false},
+        {name: 'Beam', price: 5, isCraftable: true},
       ],
-      "price": [
-        300.0,
-        5.0
-      ],
-      "resourceCraftable": [
-        false,
-        true
-      ]
     },
     {
       "increaseRatio": 1.15,
-      "toolTipText": "Increase your resource limits even more!",
-      "secondaryToolTip": "",
+      "toolTipText": "Increase your storage limits even more",
+      "secondaryToolTip": "Only a warehouse on full moons",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 100.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "w",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 100.0,
+          "objectType": "resource",
+          "object": "Wood"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 50.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "i",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 50.0,
+          "objectType": "resource",
+          "object": "Iron"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 50.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "I",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 50.0,
+          "objectType": "resource",
+          "object": "Ice"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 250.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "S",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 250.0,
+          "objectType": "resource",
+          "object": "Stone"
         },
         {
-          "typeOfEffect": "m",
-          "effectAmount": 25.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "o",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 25.0,
+          "objectType": "resource",
+          "object": "Ore"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 7,
       "name": "Warehouse",
-      "identifier": "W",
       "resourcesRequired": [
-        "b",
-        "B",
-        "i"
+        {name: 'Beam', price: 3, isCraftable: true},
+        {name: 'Block', price: 5, isCraftable: true},
+        {name: 'Nail', price: 1, isCraftable: true},
       ],
-      "price": [
-        3.0,
-        5.0,
-        1.0
-      ],
-      "resourceCraftable": [
-        true,
-        true,
-        true
-      ]
     },
     {
       "increaseRatio": 1.3,
@@ -487,30 +367,20 @@ export let buildings : Building[] = [
       "secondaryToolTip": "Little house on the tundra.",
       "effects": [
         {
-          "typeOfEffect": "m",
-          "effectAmount": 1.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "B",
-          "effectsWhatResource": "!"
+          "type": "maximum",
+          "amount": 1.0,
+          "objectType": "resource",
+          "object": "Bears"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 7,
       "name": "Cabin",
-      "identifier": "C",
       "resourcesRequired": [
-        "w",
-        "S"
+        {name: 'Wood', price: 120, isCraftable: false},
+        {name: 'Stone', price: 150, isCraftable: false},
       ],
-      "price": [
-        120.0,
-        150.0
-      ],
-      "resourceCraftable": [
-        false,
-        false
-      ]
     },
     {
       "increaseRatio": 1.15,
@@ -518,27 +388,20 @@ export let buildings : Building[] = [
       "secondaryToolTip": "Rome wasn't built in a day, but this was!",
       "effects": [
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.03,
-          "effectsWhatObjectType": "b",
-          "effectsWhatObject": "b",
-          "effectsWhatResource": "b"
+          "type": "bonus",
+          "amount": 0.03,
+          "objectType": "building",
+          "object": "Berry Field",
+          "resource": "Berries"
         }
       ],
       "isEnablable": false,
       "hasScienceDependancy": true,
       "dependancy": 9,
       "name": "Aquaduct",
-      "identifier": "a",
       "resourcesRequired": [
-        "S"
+        {name: 'Stone', price: 100, isCraftable: false},
       ],
-      "price": [
-        100.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     }
 ]
 
@@ -547,73 +410,61 @@ export let resources : Resource[] = [
       "name": "Berries",
       "defaultMaximum": 5000.0,
       "color": "black",
-      "identifier": "b"
     },
     {
       "name": "Wood",
       "defaultMaximum": 200.0,
       "color": "black",
-      "identifier": "w"
     },
     {
       "name": "Iron",
       "defaultMaximum": 100.0,
       "color": "black",
-      "identifier": "i"
     },
     {
       "name": "Ice",
       "defaultMaximum": 100.0,
       "color": "#1E90FF",
-      "identifier": "I"
     },
     {
       "name": "Science",
       "defaultMaximum": 0.0,
       "color": "#228B22",
-      "identifier": "s"
     },
     {
       "name": "Stone",
       "defaultMaximum": 500.0,
       "color": "#708090",
-      "identifier": "S"
     },
     {
       "name": "Bears",
       "defaultMaximum": 0.0,
       "color": "black",
-      "identifier": "B"
     },
     {
       "name": "Water",
       "defaultMaximum": 100.0,
       "color": "#0000B3",
-      "identifier": "W"
     },
     {
       "name": "Magic",
       "defaultMaximum": 0.0,
       "color": "#9932CC",
-      "identifier": "m"
     },
     {
       "name": "Ore",
       "defaultMaximum": 150.0,
       "color": "#A52A2A",
-      "identifier": "o"
     },
     {
       "name": "Diamond",
       "defaultMaximum": 100.0,
       "color": "black",
-      "identifier": "d"
     },
     {
       "name": "Gold",
       "defaultMaximum": 10.0,
       "color": "black",
-      "identifier": "g"
     },
 ]
 
@@ -623,89 +474,48 @@ export let craftableResources : CraftableResource[] = [
       "dependancy": 4,
       "hasScienceDependancy": true,
       "name": "Beam",
-      "identifier": "b",
       "resourcesRequired": [
-        "w"
+        {name: 'Wood', price: 150, isCraftable: false},
       ],
-      "price": [
-        150.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "toolTipText": "A heavy stone block. Used as a base for structures or to construct its walls.",
       "dependancy": 4,
       "hasScienceDependancy": true,
       "name": "Block",
-      "identifier": "B",
       "resourcesRequired": [
-        "S"
+        {name: 'Stone', price: 300, isCraftable: false},
       ],
-      "price": [
-        300.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "toolTipText": "Thick iron nails used to keep buildings in one piece.",
       "dependancy": 4,
       "hasScienceDependancy": true,
-      "name": "Iron Nail",
-      "identifier": "i",
+      "name": "Nail",
       "resourcesRequired": [
-        "i"
+        {name: 'Iron', price: 70, isCraftable: false},
       ],
-      "price": [
-        70.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
-      "toolTipText": "This crystal can be used to channel magical energy.",
+      "toolTipText": "This crystal naturally channels magical energy.",
       "dependancy": 6,
       "hasScienceDependancy": true,
       "name": "Crystal",
-      "identifier": "c",
       "resourcesRequired": [
-        "I",
-        "m",
-        "o"
+        {name: "Ice", price: 100, isCraftable: false},
+        {name: "Magic", price: 150, isCraftable: false},
+        {name: "Ore", price: 100, isCraftable: false},
       ],
-      "price": [
-        100.0,
-        150.0,
-        100.0
-      ],
-      "resourceCraftable": [
-        false,
-        false,
-        false
-      ]
     },
     {
-      "toolTipText": "Combining high-carbon diamonds with iron produces a stronger, more workable metal.",
+      "toolTipText": "Combining high-carbon diamonds with iron produces a stronger, more workable metal. Wish there was a better way to do this...",
       "dependancy": 10,
       "hasScienceDependancy": true,
       "name": "Steel",
-      "identifier": "s",
       "resourcesRequired": [
-        "i",
-        "d"
+        {name: 'Iron', price: 100, isCraftable: false},
+        {name: "Diamond", price: 50, isCraftable: false},
       ],
-      "price": [
-        100.0,
-        100.0
-      ],
-      "resourceCraftable": [
-        false,
-        false
-      ]
     }
 ]
 
@@ -713,103 +523,88 @@ export let jobs : Job[] = [
     {
       "name": "Scavenger",
       "toolTipText": "Will pick things up off the ground for you. Is better at finding wood and ice.",
-      "identifier": "s",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.15,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "w",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.15,
+          "objectType": "resource",
+          "object": "Wood"
         },
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.15,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "I",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.15,
+          "objectType": "resource",
+          "object": "Ice"
         }
       ]
     },
     {
       "name": "Farmer",
       "toolTipText": "Farmers will produce 5 berries per second.",
-      "identifier": "f",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 5.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "b",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 5.0,
+          "objectType": "resource",
+          "object": "Berries"
         }
       ]
     },
     {
       "name": "Researcher",
-      "toolTipText": "Produces 0.3 science per second. They all have pocket protectors.",
-      "identifier": "r",
+      "toolTipText": "Produces 0.3 science per second",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.3,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "s",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.3,
+          "objectType": "resource",
+          "object": "Science"
         }
       ]
     },
     {
       "name": "Sorcerer",
       "toolTipText": "Produces 0.03 magic per second.",
-      "identifier": "S",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.03,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.03,
+          "objectType": "resource",
+          "object": "Magic"
         }
       ]
     },
     {
       "name": "Miner",
       "toolTipText": "Produces 0.1 stone per second",
-      "identifier": "m",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.3,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "S",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.3,
+          "objectType": "resource",
+          "object": "Stone"
         },
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "o",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 0.1,
+          "objectType": "resource",
+          "object": "Ore"
         }
       ]
     },
     {
       "name": "Hunter",
       "toolTipText": "Can be sent out hunting every two minutes.",
-      "identifier": "h",
       "effects": []
     },
     {
       "name": "Trader",
-      "toolTipText": "Can be sent out to trade or as an envoy",
-      "identifier": "t",
+      "toolTipText": "Can be sent out to trade or as an envoy to other civilizations",
       "effects": []
     },
     {
       "name": "Warrior",
       "toolTipText": "Protect your village",
-      "identifier": "w",
       "effects": []
     }
 ]
@@ -819,303 +614,185 @@ export let sciences : Researchable[] = [
       "dependancyPos": -1,
       "toolTipText": "Allows you see the time of year.",
       "name": "Calendar",
-      "identifier": "c",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 50, isCraftable: false},
       ],
-      "price": [
-        50.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 0,
       "toolTipText": "Unlocks the farmer. Farmers produce 5 berries per second.",
       "name": "Agriculture",
-      "identifier": "a",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 100, isCraftable: false},
       ],
-      "price": [
-        100.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 0,
       "toolTipText": "Unlocks the hunter.",
       "name": "Organized Hunting",
-      "identifier": "o",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 250, isCraftable: false},
       ],
-      "price": [
-        250.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 1,
       "toolTipText": "Unlocks the mine.",
       "name": "Mining",
-      "identifier": "m",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 500, isCraftable: false},
       ],
-      "price": [
-        500.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 3,
       "toolTipText": "Unlocks the smeltery, a building that allows you to make iron.",
       "name": "Metal Work",
-      "identifier": "M",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 1000, isCraftable: false},
       ],
-      "price": [
-        1000.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 1,
       "toolTipText": "Fill the sacred tomes with precious bearkind knowledge.",
       "name": "Writing",
-      "identifier": "w",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 750, isCraftable: false},
       ],
-      "price": [
-        750.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 5,
-      "toolTipText": "Unlocks the magic pathway. \u003cbr\u003e\u003cbr\u003e Fireball! FireBall!",
+      "toolTipText": "Unlocks the magic pathway.",
       "name": "Spell Casting",
-      "identifier": "s",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 1500, isCraftable: false},
       ],
-      "price": [
-        1500.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 4,
       "toolTipText": "Construction is the art of building structures that don\u0027t fall down long enough to be useful.",
       "name": "Construction",
-      "identifier": "C",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 2500, isCraftable: false},
       ],
-      "price": [
-        2500.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 5,
-      "toolTipText": "I\u0027ll give you this metal circle for your berries.",
+      "toolTipText": "I\u0027ll trade you this metal disk for those berries.",
       "name": "Currency",
-      "identifier": "U",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 4000, isCraftable: false},
       ],
-      "price": [
-        4000.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 7,
       "toolTipText": "Using the power of math, you can now construct more complex buildings.",
       "name": "Engineering",
-      "identifier": "E",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 7500, isCraftable: false},
       ],
-      "price": [
-        7500.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 9,
       "toolTipText": "Mixing different metals and materials can produce stronger building materials.",
       "name": "Alloying",
-      "identifier": "A",
       "resourcesRequired": [
-        "s"
+        {name: 'Science', price: 10000, isCraftable: false},
       ],
-      "price": [
-        10000.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     }
 ]
 
 export let upgrades : Upgrade[] = [
     {
       "dependancy": 3,
-      "toolTipText": "Scavengers can use these axes to cut down small trees that they find. Increases wood production.",
+      "toolTipText": "Scavengers can use these axes to cut down any small trees they find. Increases wood production.",
       "effects": [
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.5,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "s",
-          "effectsWhatResource": "w"
+          "type": "bonus",
+          "amount": 0.5,
+          "objectType": "job",
+          "object": "Scavenger",
+          "resource": "Wood"
         }
       ],
       "hasScienceDependancy": true,
       "name": "Stone Axes",
-      "identifier": "s",
       "resourcesRequired": [
-        "S"
+        {name: 'Stone', price: 50, isCraftable: false},
       ],
-      "price": [
-        50.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancy": 8,
       "toolTipText": "Purify some of your ore into gold through reacting impurities with salt.",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.005,
-          "effectsWhatObjectType": "b",
-          "effectsWhatObject": "S",
-          "effectsWhatResource": "g"
+          "type": "production",
+          "amount": 0.005,
+          "objectType": "building",
+          "object": "Smeltery",
+          "resource": "Gold"
         }
       ],
       "hasScienceDependancy": true,
       "name": "Salt Cementation",
-      "identifier": "S",
       "resourcesRequired": [
-        "W",
-        "s"
+        {name: 'Water', price: 250, isCraftable: false},
+        {name: 'Science', price: 5000, isCraftable: false},
       ],
-      "price": [
-        250.0,
-        5000.0
-      ],
-      "resourceCraftable": [
-        false,
-        false
-      ]
     },
     {
       "dependancy": 10,
-      "toolTipText": "Dig deep into the crust of the planet.",
+      "toolTipText": "Dig deeper into the planet's crust",
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.01,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "d"
+          "type": "production",
+          "amount": 0.01,
+          "objectType": "job",
+          "object": "Miner",
+          "resource": "Diamond"
         }
       ],
       "hasScienceDependancy": true,
       "name": "Deep Mining",
-      "identifier": "d",
       "resourcesRequired": [
-        "i",
-        "b",
-        "s"
+        {name: 'Iron', price: 200, isCraftable: false},
+        {name: 'Beam', price: 50, isCraftable: true},
+        {name: 'Science', price: 5000, isCraftable: true},
       ],
-      "price": [
-        200.0,
-        50.0,
-        5000.0
-      ],
-      "resourceCraftable": [
-        false,
-        true,
-        false
-      ]
     },
     {
       "dependancy": 4,
       "toolTipText": "Stronger axes for your scavengers.",
       "effects": [
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.3,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "s",
-          "effectsWhatResource": "w"
+          "type": "bonus",
+          "amount": 0.3,
+          "objectType": "job",
+          "object": "Scavenger",
+          "resource": "Wood"
         }
       ],
       "hasScienceDependancy": true,
       "name": "Iron Axes",
-      "identifier": "i",
       "resourcesRequired": [
-        "i"
+        {name: 'Iron', price: 100, isCraftable: false},
       ],
-      "price": [
-        100.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancy": 3,
       "toolTipText": "Using hoes to till the soil is much easier.",
       "effects": [
         {
-          "typeOfEffect": "%",
-          "effectAmount": 0.25,
-          "effectsWhatObjectType": "j",
-          "effectsWhatObject": "f",
-          "effectsWhatResource": "b"
+          "type": "bonus",
+          "amount": 0.25,
+          "objectType": "job",
+          "object": "Farmer",
+          "resource": "Berries"
         }
       ],
       "hasScienceDependancy": true,
       "name": "Stone Hoes",
-      "identifier": "h",
       "resourcesRequired": [
-        "S"
+        {name: 'Stone', price: 100, isCraftable: false},
       ],
-      "price": [
-        100.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     }
 ]
 
@@ -1124,46 +801,25 @@ export let magic : Researchable[] = [
       "dependancyPos": -1,
       "toolTipText": "Control the mighty powers of dust motes. Also works on snow.",
       "name": "Dustomancy",
-      "identifier": "d",
       "resourcesRequired": [
-        "m"
+        {name: 'Magic', price: 50, isCraftable: false},
       ],
-      "price": [
-        50.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 0,
-      "toolTipText": "Turn this into that! Wow!",
+      "toolTipText": "Changes the properties of some things",
       "name": "Transfiguration",
-      "identifier": "t",
       "resourcesRequired": [
-        "m"
+        {name: 'Magic', price: 100, isCraftable: false},
       ],
-      "price": [
-        100.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     },
     {
       "dependancyPos": 0,
       "toolTipText": "Uhh.. That building was always on fire...",
       "name": "Pyromancy",
-      "identifier": "p",
       "resourcesRequired": [
-        "m"
+        {name: 'Magic', price: 170, isCraftable: false},
       ],
-      "price": [
-        170.0
-      ],
-      "resourceCraftable": [
-        false
-      ]
     }
 ]
 
@@ -1175,25 +831,22 @@ export let spells : Spell[] = [
       "isEnablable": false,
       "effects": [
         {
-          "typeOfEffect": "-",
-          "effectAmount": 1000.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "b",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -1000.0,
+          "objectType": "resource",
+          "object": "Berries"
         },
         {
-          "typeOfEffect": "-",
-          "effectAmount": 5.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -5.0,
+          "objectType": "resource",
+          "object": "Magic"
         },
         {
-          "typeOfEffect": "+",
-          "effectAmount": 50.0,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "w",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": 50.0,
+          "objectType": "resource",
+          "object": "Wood"
         }
       ]
     },
@@ -1204,11 +857,10 @@ export let spells : Spell[] = [
       "isEnablable": true,
       "effects": [
         {
-          "typeOfEffect": "-",
-          "effectAmount": 0.04,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -0.04,
+          "objectType": "resource",
+          "object": "Magic"
         }
       ]
     },
@@ -1219,18 +871,17 @@ export let spells : Spell[] = [
       "isEnablable": true,
       "effects": [
         {
-          "typeOfEffect": "+",
-          "effectAmount": 0.1,
-          "effectsWhatObjectType": "b",
-          "effectsWhatObject": "S",
-          "effectsWhatResource": "w"
+          "type": "production",
+          "amount": 0.1,
+          "objectType": "building",
+          "object": "Smeltery",
+          "resource": "Wood"
         },
         {
-          "typeOfEffect": "-",
-          "effectAmount": 0.05,
-          "effectsWhatObjectType": "r",
-          "effectsWhatObject": "m",
-          "effectsWhatResource": "!"
+          "type": "production",
+          "amount": -0.05,
+          "objectType": "resource",
+          "object": "Magic"
         }
       ]
     }
