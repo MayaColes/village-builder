@@ -1,22 +1,34 @@
-import { Component, Input } from '@angular/core';
-import { Building, CraftableResource, Resource } from 'src/app/data-interfaces';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { CraftableResource, Resource } from 'src/app/data-interfaces';
+import { Building } from 'src/game-objects/building/building';
 
 @Component({
   selector: 'building-button',
   templateUrl: './building-button.component.html',
   styleUrls: ['./building-button.component.css']
 })
-export class BuildingButtonComponent {
+export class BuildingButtonComponent implements OnInit{
   @Input() building : Building;
 
   @Input() allResources : (Resource | CraftableResource)[]
 
   showTooltip = false;
 
-  buildBuilding(){
-if(this.building.numberBuilt){
-  this.building.numberBuilt++;
-}
+  buildingSubject : Subject<Building>;
+
+  updateFlag = false;
+
+  constructor(private ref: ChangeDetectorRef) {}
+
+  ngOnInit(){
+
+    this.building.subject.subscribe({
+      next: () => {this.ref.markForCheck()}
+    })
+  }
+
+  /*buildBuilding(){
     let canBuild = true;
     let usedResources : (CraftableResource | Resource)[] = [];
     this.building.resourcesRequired.forEach((required) => {
@@ -41,9 +53,10 @@ if(this.building.numberBuilt){
         }
       })
 
-      if(this.building.numberBuilt){
+      if(this.building.numberBuilt !== undefined){
         this.building.numberBuilt++;
       }
+      this.buildingSubject.next(this.building)
     }
-  }
+  }*/
 }

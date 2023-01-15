@@ -1,4 +1,4 @@
-export interface Building {
+export interface BuildingBase {
     name: string,
     increaseRatio: number,
     toolTipText: string,
@@ -8,9 +8,6 @@ export interface Building {
     hasScienceDependancy: boolean,
     dependancy: number,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
-    numberBuilt?: number,
-    numberEnabled?: number,
-    isVisible?: boolean,
 }
 
 export interface Civilization {

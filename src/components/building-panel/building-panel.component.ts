@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Building, CraftableResource, Resource } from 'src/app/data-interfaces';
+import { CraftableResource, Resource } from 'src/app/data-interfaces';
+import { Building } from 'src/game-objects/building/building';
 
 @Component({
   selector: 'building-panel',

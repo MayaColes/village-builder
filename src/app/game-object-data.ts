@@ -1,6 +1,6 @@
-import { Building, Civilization, CraftableResource, Job, Researchable, Resource, Spell, Upgrade } from "./data-interfaces";
+import { BuildingBase, Civilization, CraftableResource, Job, Researchable, Resource, Spell, Upgrade } from "./data-interfaces";
 
-export let buildings : Building[] = [
+export const buildings : BuildingBase[] = [
     {
       "increaseRatio": 3.0,
       "toolTipText": "This house can hold two bears. Bears need 3 berries and 0.5 water per second.",
