@@ -1,4 +1,3 @@
-import { Subject } from "rxjs";
 import { BuildingBase, Effect } from "src/app/data-interfaces";
 
 export class Building {
@@ -15,7 +14,6 @@ export class Building {
     numberBuilt_ : number;
     numberEnabled_ : number;
     isVisible_ : boolean;
-    subject_ : Subject<void>;
 
     constructor(info : BuildingBase, numberBuilt : number, numberEnabled : number, isVisible : boolean){
         this.name = info.name;
@@ -29,12 +27,10 @@ export class Building {
         this.numberBuilt_ = numberBuilt;
         this.numberEnabled_ = numberEnabled;
         this.isVisible_ = isVisible;
-        this.subject_ = new Subject<void>();
     }
 
     buildBuilding(){
         this.numberBuilt_++; // TODO
-        this.subject_.next();
     }
 
     get numberBuilt() : number { return this.numberBuilt_ }
@@ -42,7 +38,4 @@ export class Building {
     get numberEnabled() : number { return this.numberEnabled_ }
 
     get isVisible() : boolean { return this.isVisible_ }
-
-    get subject() { return this.subject_ }
-
 }

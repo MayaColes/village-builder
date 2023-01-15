@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CraftableResource, Resource } from 'src/app/data-interfaces';
+import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
+import { Resource } from 'src/game-objects/resource/resource';
 
 @Component({
   selector: 'tooltip',

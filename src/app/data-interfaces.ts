@@ -32,24 +32,18 @@ export interface Civilization {
     gifts?: number[]
 }
 
-export interface Resource {
+export interface ResourceBase {
     name: string,
     defaultMaximum: number,
     color: string,
-    currentProduction?: number,
-    maximum?: number,
-    amount?: number,
-    isVisible?: boolean
 }
 
-export interface CraftableResource {
+export interface CraftableResourceBase {
     name: string,
     toolTipText: string,
     dependancy: number,
     hasScienceDependancy: boolean,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
-    amount?: number,
-    isVisible?: boolean,
 }
 
 export interface Job {

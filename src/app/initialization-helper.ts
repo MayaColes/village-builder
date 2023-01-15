@@ -1,5 +1,6 @@
 import { Building } from "src/game-objects/building/building";
-import { Effect, Job, Resource, Upgrade } from "./data-interfaces";
+import { Resource } from "src/game-objects/resource/resource";
+import { Effect, Job, Upgrade } from "./data-interfaces";
 
 export class InitializationHelper {
     // Adds production and production bonus effects from researched upgrades to jobs and buildings
@@ -60,15 +61,9 @@ export class InitializationHelper {
                         if(effect.bonus){
                             buildingProduction += effect.amount * effect.bonus;
                         }
-                        if(building.isEnablable !== undefined &&
-                             building.numberEnabled !== undefined && 
-                             building.numberBuilt !== undefined && 
-                             affectedResource.currentProduction !== undefined){
-                            
-                            buildingProduction *= building.isEnablable ? building.numberEnabled : building.numberBuilt;
+                        buildingProduction *= building.isEnablable ? building.numberEnabled : building.numberBuilt;
 
-                            affectedResource.currentProduction += buildingProduction;
-                        }
+                        affectedResource.currentProduction += buildingProduction;
                     }
                 }
             })

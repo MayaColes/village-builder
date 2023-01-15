@@ -1,4 +1,4 @@
-import { BuildingBase, Civilization, CraftableResource, Job, Researchable, Resource, Spell, Upgrade } from "./data-interfaces";
+import { BuildingBase, Civilization, CraftableResourceBase, Job, Researchable, ResourceBase, Spell, Upgrade } from "./data-interfaces";
 
 export const buildings : BuildingBase[] = [
     {
@@ -405,7 +405,7 @@ export const buildings : BuildingBase[] = [
     }
 ]
 
-export let resources : Resource[] = [
+export let resources : ResourceBase[] = [
     {
       "name": "Berries",
       "defaultMaximum": 5000.0,
@@ -468,7 +468,7 @@ export let resources : Resource[] = [
     },
 ]
 
-export let craftableResources : CraftableResource[] = [
+export let craftableResources : CraftableResourceBase[] = [
     {
       "toolTipText": "A wooden beam. Important for advanced structures.",
       "dependancy": 4,

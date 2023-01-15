@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { Building } from 'src/game-objects/building/building';
+import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
+import { Resource } from 'src/game-objects/resource/resource';
 import { StorageService } from 'src/services/storage.service';
 import { buildings, resources, craftableResources, jobs, sciences, upgrades, magic, spells, civilizations } from './game-object-data'
 import { InitializationHelper } from './initialization-helper';
@@ -17,9 +19,9 @@ export class AppComponent implements OnInit {
 
   buildings : Building[] = [];
 
-  resources = resources;
+  resources : Resource[] = [];
 
-  craftableResources = craftableResources;
+  craftableResources : CraftableResource[] = [];
 
   jobs = jobs;
 
@@ -58,23 +60,27 @@ export class AppComponent implements OnInit {
       }
     })
 
-    this.resources.forEach((resource) => {
-      let didInit = this.storageService.initObjFromLocalStorage(resource, resource.name);
+    resources.forEach((resource) => {
+      let gameObjectInfo = localStorage.getItem(resource.name);
 
-      resource.currentProduction = 0;
-      resource.maximum = resource.defaultMaximum;
-      if(!didInit){
-        resource.amount = 0;
-        resource.isVisible = false;
+      if(gameObjectInfo){
+        let gameObjectValues = JSON.parse(gameObjectInfo);
+        this.resources.push(new Resource(resource, gameObjectValues.amount, gameObjectValues.isVisible));
+      }
+      else {
+        this.resources.push(new Resource(resource, 0, false));
       }
     })
 
-    this.craftableResources.forEach((craftableResource) => {
-      let didInit = this.storageService.initObjFromLocalStorage(craftableResource, craftableResource.name);
+    craftableResources.forEach((craftableResource) => {
+      let gameObjectInfo = localStorage.getItem(craftableResource.name);
 
-      if(!didInit){
-        craftableResource.amount = 0;
-        craftableResource.isVisible = false;
+      if(gameObjectInfo){
+        let gameObjectValues = JSON.parse(gameObjectInfo);
+        this.craftableResources.push(new CraftableResource(craftableResource, gameObjectValues.amount, gameObjectValues.isVisible));
+      }
+      else {
+        this.craftableResources.push(new CraftableResource(craftableResource, 0, false));
       }
     })
 
@@ -117,10 +123,8 @@ export class AppComponent implements OnInit {
   };
 
   doOnTick(){
-    resources.forEach((resource) => {
-      if(resource.amount !== undefined && resource.currentProduction !== undefined){
-        resource.amount += resource.currentProduction;
-      }
+    this.resources.forEach((resource) => {
+      resource.addCurrentProduction();
     })
   }
 

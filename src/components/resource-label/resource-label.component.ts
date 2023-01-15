@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Resource } from 'src/app/data-interfaces';
+import { Resource } from 'src/game-objects/resource/resource';
 
 @Component({
   selector: 'resource-label',

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CraftableResource } from 'src/app/data-interfaces';
+import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
 
 @Component({
   selector: 'craftable-resource-label',
