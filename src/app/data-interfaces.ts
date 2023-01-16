@@ -46,12 +46,10 @@ export interface CraftableResourceBase {
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
 }
 
-export interface Job {
+export interface JobBase {
     name: string,
     toolTipText: string,
     effects: Effect[]
-    numberWorking?: number,
-    isVisible?: boolean
 }
 
 export interface Researchable {

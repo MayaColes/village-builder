@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Job } from 'src/app/data-interfaces';
+import { Job } from 'src/game-objects/job/job';
 
 @Component({
   selector: 'job-button',
@@ -8,10 +8,4 @@ import { Job } from 'src/app/data-interfaces';
 })
 export class JobButtonComponent {
   @Input() job : Job;
-
-  changeWorking(amount : number){
-    if(this.job.numberWorking !== undefined){
-      this.job.numberWorking += amount;
-    }
-  }
 }

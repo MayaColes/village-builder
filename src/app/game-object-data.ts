@@ -1,4 +1,4 @@
-import { BuildingBase, Civilization, CraftableResourceBase, Job, Researchable, ResourceBase, Spell, Upgrade } from "./data-interfaces";
+import { BuildingBase, Civilization, CraftableResourceBase, JobBase, Researchable, ResourceBase, Spell, Upgrade } from "./data-interfaces";
 
 export const buildings : BuildingBase[] = [
     {
@@ -519,7 +519,7 @@ export let craftableResources : CraftableResourceBase[] = [
     }
 ]
 
-export let jobs : Job[] = [
+export let jobs : JobBase[] = [
     {
       "name": "Scavenger",
       "toolTipText": "Will pick things up off the ground for you. Is better at finding wood and ice.",

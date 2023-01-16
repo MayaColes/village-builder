@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Job } from 'src/app/data-interfaces';
 import { Building } from 'src/game-objects/building/building';
 import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
+import { Job } from 'src/game-objects/job/job';
 import { Resource } from 'src/game-objects/resource/resource';
 
 @Component({
