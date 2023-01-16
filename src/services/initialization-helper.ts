@@ -1,6 +1,6 @@
 import { Building } from "src/game-objects/building/building";
 import { Resource } from "src/game-objects/resource/resource";
-import { Effect, Job, Upgrade } from "./data-interfaces";
+import { Effect, Job, Upgrade } from "../app/data-interfaces";
 
 export class InitializationHelper {
     // Adds production and production bonus effects from researched upgrades to jobs and buildings
