@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Job } from 'src/app/data-interfaces';
 import { Building } from 'src/game-objects/building/building';
 import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
 import { Resource } from 'src/game-objects/resource/resource';
@@ -14,6 +15,10 @@ export class BuildingPanelComponent {
   @Input() resources : Resource[];
 
   @Input() craftableResources : CraftableResource[];
+
+  @Input() jobs : Job[];
+
+  currentTab = 0;
 
   getAllResources(){
     return [...this.resources, ...this.craftableResources]

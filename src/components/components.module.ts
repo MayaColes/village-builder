@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipPriceInfoComponent } from './tooltip-price-info/tooltip-price-info.component';
 import { TooltipEffectInfoComponent } from './tooltip-effect-info/tooltip-effect-info.component';
+import { JobButtonComponent } from './job-button/job-button.component';
 
 
 
@@ -23,7 +24,8 @@ import { TooltipEffectInfoComponent } from './tooltip-effect-info/tooltip-effect
     BuildingPanelComponent,
     TooltipComponent,
     TooltipPriceInfoComponent,
-    TooltipEffectInfoComponent
+    TooltipEffectInfoComponent,
+    JobButtonComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,36 @@
+.jobButton {
+    border-style: solid;
+    border-color: gray;
+    border-radius: 5px;
+    width: 100%;
+    border-width: 1px;
+    background-color: white;
+    height: 40px;
+    flex-direction: row;
+    display: flex;
+}
+
+.jobLabel {
+    width: 80%;
+}
+
+.addSubButton {
+    width: 10%;
+    border-left: 1px solid gray;
+}
+
+.centerHorizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.centerVertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.smallPadding {
+    padding-left: 4px
+}

@@ -1,8 +1,32 @@
 <div class="container">
-    <div *ngFor="let building of buildings; let i = index;">
-        <building-button [ngClass]="{'leftButton': i % 2 == 0, 'rightButton': i % 2 == 1, 'buttonFormat': true}"
-                         [allResources]="getAllResources()"
-                         [building]="building">
-        </building-button>
+    <div class="buttonRow">
+        <div class="tabButton" (click)="currentTab = 0">Buildings</div>
+        <div class="tabButton" (click)="currentTab = 1">| Jobs</div>
+        <div class="tabButton" (click)="currentTab = 2">| Science</div>
+    </div>
+    <div class="buttonContainer" *ngIf="currentTab === 0">
+        <div class="column">
+            <div *ngFor="let building of buildings; let i = index;" [ngClass]="{'buttonFormat': i % 2 === 0}">
+                <building-button *ngIf="i % 2 === 0"
+                                 [allResources]="getAllResources()"
+                                 [building]="building">
+                </building-button>
+            </div>
+        </div>
+        <div class="column">
+            <div *ngFor="let building of buildings; let i = index;" [ngClass]="{'buttonFormat': i % 2 === 1}">
+                <building-button *ngIf="i % 2 === 1"
+                                 [allResources]="getAllResources()"
+                                 [building]="building">
+                </building-button>
+            </div>
+        </div>
+    </div>
+    <div class="outline" *ngIf="currentTab === 1">
+        <div class="jobContainer">
+            <div *ngFor="let job of jobs" class="jobFormat">
+                <job-button [job]="job"></job-button>
+            </div>
+        </div>
     </div>
 </div>

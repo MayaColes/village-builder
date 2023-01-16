@@ -1,10 +1,54 @@
-.leftButton {
-    float:left;
-    width:45%;
+.column {
+    flex-direction: column;
+    display: flex;
+    width: calc(50% - 20px);
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.rightButton {
-    float:right;
-    width:45%;
+.container {
+    margin: 5px;
+}
+
+.buttonContainer {
+    border-color: gray;
+    border-radius: 10px;
+    border-style: solid;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+}
+
+.jobContainer {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    margin: 5px;
+}
+
+.outline {
+    border-color: gray;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+.jobFormat {
+    margin: 5px;
+}
+
+.buttonFormat {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 100%
+}
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.tabButton {
+    padding: 0px 5px 5px 0px;
+    cursor: pointer
 }
 

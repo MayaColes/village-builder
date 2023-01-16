@@ -1,0 +1,13 @@
+<div class="jobButton">
+    <div class="jobLabel centerVertical">
+        <div class="centerHorizontal">{{ job.name }} 
+            <span *ngIf="job.numberWorking && job.numberWorking > 0" class="smallPadding">({{ job.numberWorking }})</span>
+        </div>
+    </div>
+    <div class="addSubButton centerVertical">
+        <div class="centerHorizontal" (click)="changeWorking(-1)">-</div>
+    </div>
+    <div class="addSubButton centerVertical">
+        <div class="centerHorizontal" (click)="changeWorking(1)">+</div>
+    </div>
+</div>
