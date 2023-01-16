@@ -4,6 +4,7 @@ import { Building } from 'src/game-objects/building/building';
 import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
 import { Resource } from 'src/game-objects/resource/resource';
 import { StorageService } from 'src/services/storage.service';
+import { Effect } from './data-interfaces';
 import { buildings, resources, craftableResources, jobs, sciences, upgrades, magic, spells, civilizations } from './game-object-data'
 import { InitializationHelper } from './initialization-helper';
 
@@ -48,18 +49,6 @@ export class AppComponent implements OnInit {
   }
 
   initFromLocalStorage(){
-    buildings.map((building) => {
-      let gameObjectInfo = localStorage.getItem(building.name);
-
-      if(gameObjectInfo){
-        let gameObjectValues = JSON.parse(gameObjectInfo);
-        this.buildings.push(new Building(building, gameObjectValues.numberBuilt, gameObjectValues.numberEnabled, gameObjectValues.isVisible));
-      }
-      else{
-        this.buildings.push(new Building(building, 0, 0, false));
-      }
-    })
-
     resources.forEach((resource) => {
       let gameObjectInfo = localStorage.getItem(resource.name);
 
@@ -82,6 +71,27 @@ export class AppComponent implements OnInit {
       else {
         this.craftableResources.push(new CraftableResource(craftableResource, 0, false));
       }
+    })
+
+    buildings.forEach((building) => {
+      let gameObjectInfo = localStorage.getItem(building.name);
+      let newBuilding = null;
+
+      if(gameObjectInfo){
+        let gameObjectValues = JSON.parse(gameObjectInfo);
+        newBuilding =new Building(building, gameObjectValues.numberBuilt, 
+                                  gameObjectValues.numberEnabled, gameObjectValues.isVisible,
+                                  this.resources, this.craftableResources);
+      }
+      else{
+        newBuilding = new Building(building, 0, 0, false, this.resources, this.craftableResources);
+      }
+      
+      newBuilding.subject.subscribe(({
+        next: (effects) => this.addEffects(effects)
+      }))
+
+      this.buildings.push(newBuilding)
     })
 
     this.jobs.forEach((job) => {
@@ -112,14 +122,67 @@ export class AppComponent implements OnInit {
     })
   }
 
+  addEffects(effects : Effect[]){
+    for(let effect of effects){
+      if(effect.objectType === 'resource'){
+        let affectedGameObject = this.resources.find(obj => {
+          return obj.name === effect.object
+        })
+
+        if(affectedGameObject && effect.type === 'production'){
+          affectedGameObject.currentProduction += effect.amount;
+        }
+        else if(affectedGameObject && effect.type === 'maximum'){
+          affectedGameObject.maximum += effect.amount;
+        }
+      }
+      else{
+        let affectedGameObject = effect.objectType === 'building' ? 
+            this.buildings.find(obj => {
+              return obj.name === effect.object
+            }) :
+            this.jobs.find(obj => {
+              return obj.name === effect.object
+            })
+      
+        if(!affectedGameObject) continue;
+
+        let affectedGameObjectEffect = affectedGameObject.effects.find((eff : Effect) => {
+          return eff.object === effect.resource;
+        })
+
+        if(!affectedGameObjectEffect){
+          affectedGameObject.effects.push({
+              type: "production",
+              amount: effect.type === 'bonus' ? 0 : effect.amount,
+              objectType: 'resource',
+              object: effect.resource || '',
+              bonus: effect.type === 'bonus' ? effect.amount : 0
+          })
+        }
+        else{
+          if(effect.type === 'production'){
+            affectedGameObjectEffect.amount += effect.amount;
+          }
+          else if(effect.type === 'bonus'){
+            if(!affectedGameObjectEffect.bonus){
+                affectedGameObjectEffect['bonus'] = 0;
+            }
+            affectedGameObjectEffect.amount += effect.amount;
+          }
+        }
+      }
+    }
+  }
+
   calculateInitialValues() {
     this.upgrades.forEach((upgrade) => {
-    //  InitializationHelper.updateUpgradeEffects(upgrade, this.buildings, this.jobs)
+      InitializationHelper.updateUpgradeEffects(upgrade, this.buildings, this.jobs)
     })
 
-    //InitializationHelper.updateEffectBonuses(this.buildings, this.jobs);
+    InitializationHelper.updateEffectBonuses(this.buildings, this.jobs);
 
-    //InitializationHelper.calculateResourceProduction(this.resources, this.buildings, this.jobs);
+    InitializationHelper.calculateResourceProduction(this.resources, this.buildings, this.jobs);
   };
 
   doOnTick(){

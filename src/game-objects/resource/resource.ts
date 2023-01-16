@@ -37,6 +37,10 @@ export class Resource {
 
     set currentProduction(production : number) { this.currentProduction_ = production }
 
+    set maximum(maximum : number) { this.maximum_ = maximum }
+
+    set amount(amount : number) { this.amount_ = amount }
+
     get currentProduction() { return this.currentProduction_ }
 
     get maximum() { return this.maximum_ }

@@ -21,7 +21,9 @@ export class CraftableResource {
         this.isVisible_ = isVisible;
     }
 
-    get isVisible() { return this.isVisible_ }
+    set amount(amount : number) { this.amount_ = amount }
 
     get amount() { return this.amount_ }
+
+    get isVisible() { return this.isVisible_ }
 }
