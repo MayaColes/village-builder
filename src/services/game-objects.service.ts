@@ -69,6 +69,8 @@ export class GameObjectsService {
       }
     })
 
+    this.craftableResources.forEach((craftableResource) => craftableResource.initializeUsedResources(this.resources, this.craftableResources))
+
     buildings.forEach((building) => {
       let gameObjectInfo = localStorage.getItem(building.name);
       let newBuilding = null;

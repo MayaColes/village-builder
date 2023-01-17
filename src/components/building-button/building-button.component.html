@@ -1,10 +1,10 @@
 <button class="button" 
         (mouseenter)="showTooltip = true"
         (mouseleave)="showTooltip = false" 
-        (click)="building.buildBuilding()">
+        (click)="building.build()">
     {{ building.name }} 
     <span *ngIf="building.numberBuilt && building.numberBuilt > 0"> 
         ({{ building.numberBuilt}})
     </span>
 </button>
-<tooltip *ngIf="showTooltip" [gameObject]="building" type="buildable" [resources]="allResources"></tooltip>
+<tooltip *ngIf="showTooltip" [gameObject]="building" type="buildable"></tooltip>

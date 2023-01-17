@@ -11,12 +11,4 @@ export class TooltipComponent {
   @Input() type : string = 'none';
 
   @Input() gameObject : any;
-
-  @Input() resources : (Resource | CraftableResource)[];
-
-  findResource(name : string){
-    return this.resources.find(obj => {
-      return obj.name === name;
-    }) || this.resources[0];
-  }
 }

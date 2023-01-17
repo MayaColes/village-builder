@@ -32,7 +32,6 @@ export class Job {
     }
 
     changeWorking(change : number){
-        console.log(this.freeBears_)
         if((this.freeBears_ - change) >= 0 && (this.numberWorking_ + change) >= 0){ 
             this.freeBears_ -= change;
             this.numberWorking_ += change;

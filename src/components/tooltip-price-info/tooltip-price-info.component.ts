@@ -10,24 +10,13 @@ import { Resource } from 'src/game-objects/resource/resource';
 export class TooltipPriceInfoComponent implements OnInit {
   @Input() resource : Resource | CraftableResource;
 
-  @Input() allResources : (Resource | CraftableResource)[];
-
   @Input() price : number;
 
-  isCraftable : boolean;
-
-  resourcesToCraft: any[] = [];
+  isCraftable = false;
 
   ngOnInit(){
-    this.isCraftable = ('resourcesRequired' in this.resource);
-    if(this.isCraftable){
-      this.resourcesToCraft = (this.resource as CraftableResource).resourcesRequired;
+    if(this.resource instanceof CraftableResource){
+      this.isCraftable = true;
     }
-  }
-
-  findResource(name : string){
-    return this.allResources.find(obj => {
-      return obj.name === name;
-    }) || this.allResources[0];
   }
 }

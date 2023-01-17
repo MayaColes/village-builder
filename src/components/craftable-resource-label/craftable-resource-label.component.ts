@@ -8,10 +8,4 @@ import { CraftableResource } from 'src/game-objects/craftable-resource/craftable
 })
 export class CraftableResourceLabelComponent {
   @Input() craftableResource : CraftableResource;
-  
-  @Output() craftResource = new EventEmitter<number>();
-
-  doCraftResource(crafts : number){
-    this.craftResource.emit(crafts);
-  }
 }

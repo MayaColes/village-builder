@@ -17,7 +17,7 @@ export class Building {
     numberBuilt_ : number;
     numberEnabled_ : number;
     isVisible_ : boolean;
-    usedResources : (Resource | CraftableResource)[]
+    usedResources_ : (Resource | CraftableResource)[]
 
     public readonly subject : Subject<Effect[]>;
 
@@ -39,14 +39,14 @@ export class Building {
 
         this.subject = new Subject<Effect[]>();
 
-        this.usedResources = [];
+        this.usedResources_ = [];
         this.findUsedResources(allResources, allCraftableResources)
     }
 
-    buildBuilding(){
+    build(){
         if(this.checkBuildable(1)){
             for(let required of this.resourcesRequired){
-                let resource = this.usedResources.find(obj => {
+                let resource = this.usedResources_.find(obj => {
                     obj.name === required.name;
                 })
                 if(resource){
@@ -60,7 +60,7 @@ export class Building {
 
     checkBuildable(numberBuilt : number){
         for(let required of this.resourcesRequired){
-            let resource = this.usedResources.find(obj => {
+            let resource = this.usedResources_.find(obj => {
                 obj.name === required.name;
             })
 
@@ -70,6 +70,10 @@ export class Building {
         }
 
         return true
+    }
+
+    findUsedResource(name : string) {
+        return this.usedResources_.find(obj => obj.name === name)
     }
 
     private findUsedResources(allResources : Resource[], allCraftableResources : CraftableResource[]){
@@ -88,7 +92,7 @@ export class Building {
             }
 
             if(resource){
-                this.usedResources.push(resource);
+                this.usedResources_.push(resource);
             }
         })
     }

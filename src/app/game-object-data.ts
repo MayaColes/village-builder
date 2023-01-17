@@ -405,7 +405,7 @@ export const buildings : BuildingBase[] = [
     }
 ]
 
-export let resources : ResourceBase[] = [
+export const resources : ResourceBase[] = [
     {
       "name": "Berries",
       "defaultMaximum": 5000.0,
@@ -468,7 +468,7 @@ export let resources : ResourceBase[] = [
     },
 ]
 
-export let craftableResources : CraftableResourceBase[] = [
+export const craftableResources : CraftableResourceBase[] = [
     {
       "toolTipText": "A wooden beam. Important for advanced structures.",
       "dependancy": 4,
@@ -519,7 +519,7 @@ export let craftableResources : CraftableResourceBase[] = [
     }
 ]
 
-export let jobs : JobBase[] = [
+export const jobs : JobBase[] = [
     {
       "name": "Scavenger",
       "toolTipText": "Will pick things up off the ground for you. Is better at finding wood and ice.",

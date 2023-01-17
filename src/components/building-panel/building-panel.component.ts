@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Building } from 'src/game-objects/building/building';
-import { CraftableResource } from 'src/game-objects/craftable-resource/craftable-resource';
 import { Job } from 'src/game-objects/job/job';
-import { Resource } from 'src/game-objects/resource/resource';
 
 @Component({
   selector: 'building-panel',
@@ -12,10 +10,6 @@ import { Resource } from 'src/game-objects/resource/resource';
 export class BuildingPanelComponent {
   @Input() buildings : Building[];
 
-  @Input() resources : Resource[];
-
-  @Input() craftableResources : CraftableResource[];
-
   @Input() jobs : Job[];
 
   @Output() gather = new EventEmitter<void>();
@@ -23,10 +17,6 @@ export class BuildingPanelComponent {
   currentTab = 0;
 
   showGatherTooltip = false;
-
-  getAllResources(){
-    return [...this.resources, ...this.craftableResources]
-  }
 
   doGather(){
     this.gather.emit();
