@@ -1,4 +1,4 @@
-import { BuildingBase, Civilization, CraftableResourceBase, JobBase, Researchable, ResourceBase, Spell, Upgrade } from "./data-interfaces";
+import { BuildingBase, Civilization, CraftableResourceBase, JobBase, ResearchableBase, ResourceBase, Spell, Upgrade } from "./data-interfaces";
 
 export const buildings : BuildingBase[] = [
     {
@@ -609,9 +609,9 @@ export const jobs : JobBase[] = [
     }
 ]
 
-export let sciences : Researchable[] = [
+export const sciences : ResearchableBase[] = [
     {
-      "dependancyPos": -1,
+      "dependancyName": "",
       "toolTipText": "Allows you see the time of year.",
       "name": "Calendar",
       "resourcesRequired": [
@@ -619,7 +619,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 0,
+      "dependancyName": "",
       "toolTipText": "Unlocks the farmer. Farmers produce 5 berries per second.",
       "name": "Agriculture",
       "resourcesRequired": [
@@ -627,7 +627,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 0,
+      "dependancyName": "Calendar",
       "toolTipText": "Unlocks the hunter.",
       "name": "Organized Hunting",
       "resourcesRequired": [
@@ -635,7 +635,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 1,
+      "dependancyName": "Agriculture",
       "toolTipText": "Unlocks the mine.",
       "name": "Mining",
       "resourcesRequired": [
@@ -643,7 +643,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 3,
+      "dependancyName": "Mining",
       "toolTipText": "Unlocks the smeltery, a building that allows you to make iron.",
       "name": "Metal Work",
       "resourcesRequired": [
@@ -651,7 +651,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 1,
+      "dependancyName": "Agriculture",
       "toolTipText": "Fill the sacred tomes with precious bearkind knowledge.",
       "name": "Writing",
       "resourcesRequired": [
@@ -659,7 +659,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 5,
+      "dependancyName": "Writing",
       "toolTipText": "Unlocks the magic pathway.",
       "name": "Spell Casting",
       "resourcesRequired": [
@@ -667,7 +667,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 4,
+      "dependancyName": "Metal Work",
       "toolTipText": "Construction is the art of building structures that don\u0027t fall down long enough to be useful.",
       "name": "Construction",
       "resourcesRequired": [
@@ -675,7 +675,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 5,
+      "dependancyName": "Writing",
       "toolTipText": "I\u0027ll trade you this metal disk for those berries.",
       "name": "Currency",
       "resourcesRequired": [
@@ -683,7 +683,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 7,
+      "dependancyName": "Construction",
       "toolTipText": "Using the power of math, you can now construct more complex buildings.",
       "name": "Engineering",
       "resourcesRequired": [
@@ -691,7 +691,7 @@ export let sciences : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 9,
+      "dependancyName": "Engineering",
       "toolTipText": "Mixing different metals and materials can produce stronger building materials.",
       "name": "Alloying",
       "resourcesRequired": [
@@ -796,9 +796,9 @@ export let upgrades : Upgrade[] = [
     }
 ]
 
-export let magic : Researchable[] = [
+export const magic : ResearchableBase[] = [
     {
-      "dependancyPos": -1,
+      "dependancyName": "",
       "toolTipText": "Control the mighty powers of dust motes. Also works on snow.",
       "name": "Dustomancy",
       "resourcesRequired": [
@@ -806,7 +806,7 @@ export let magic : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 0,
+      "dependancyName": "",
       "toolTipText": "Changes the properties of some things",
       "name": "Transfiguration",
       "resourcesRequired": [
@@ -814,7 +814,7 @@ export let magic : Researchable[] = [
       ],
     },
     {
-      "dependancyPos": 0,
+      "dependancyName": "Dustomancy",
       "toolTipText": "Uhh.. That building was always on fire...",
       "name": "Pyromancy",
       "resourcesRequired": [

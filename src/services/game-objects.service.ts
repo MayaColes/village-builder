@@ -8,6 +8,7 @@ import { Resource } from 'src/game-objects/resource/resource';
 import { StorageService } from './storage.service';
 import { Job } from 'src/game-objects/job/job';
 import { Subject } from 'rxjs';
+import { Researchable } from 'src/game-objects/researchable/researchable';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +23,11 @@ export class GameObjectsService {
 
   jobs : Job[] = [];
 
-  sciences = sciences;
+  sciences : Researchable[] = [];
 
   upgrades = upgrades;
 
-  magic = magic;
+  magic : Researchable[] = [];
 
   spells = spells;
 
@@ -119,14 +120,22 @@ export class GameObjectsService {
 
     this.freeBearsSubject.next(this.freeBears);
 
-    this.sciences.forEach((science) => {
-      let didInit = this.storageService.initObjFromLocalStorage(science, science.name);
+    sciences.forEach((science) => {
+      let gameObjectInfo = localStorage.getItem(science.name);
+      let newScience = null;
 
-      if(!didInit){
-        science.isResearched = false;
-        science.isVisible = false;
+      if(gameObjectInfo){
+        let gameObjectValues = JSON.parse(gameObjectInfo);
+        newScience = new Researchable(science, gameObjectValues.isResearched, gameObjectValues.isVisible, this.resources, this.craftableResources);
       }
+      else{
+        newScience = new Researchable(science, false, false, this.resources, this.craftableResources);
+      }
+
+      this.sciences.push(newScience)
     })
+
+    this.sciences.forEach((science) => science.initDependency(this.sciences))
 
     this.upgrades.forEach((upgrade) => {
       let didInit = this.storageService.initObjFromLocalStorage(upgrade, upgrade.name);

@@ -52,13 +52,11 @@ export interface JobBase {
     effects: Effect[]
 }
 
-export interface Researchable {
+export interface ResearchableBase {
     name: string,
-    dependancyPos: number,
+    dependancyName: string,
     toolTipText: string,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
-    isResearched?: boolean,
-    isVisible?: boolean,
 }
 
 export interface Upgrade {
