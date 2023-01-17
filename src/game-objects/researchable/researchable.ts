@@ -68,6 +68,10 @@ export class Researchable {
         }
     }
 
+    findUsedResource(name : string) {
+        return this.usedResources_.find(obj => obj.name === name)
+    }
+
     private initUsedResources(allResources : Resource[], allCraftableResources : CraftableResource[]){
         this.resourcesRequired.forEach((required) => {
             let resource = undefined;

@@ -1,5 +1,5 @@
 <div class="container">
     <resource-panel class="resourcePanel" [resources]="gameObjectService.resources" [craftableResources]="gameObjectService.craftableResources"></resource-panel>
-    <building-panel class="buildingPanel" [buildings]="gameObjectService.buildings" [jobs]="gameObjectService.jobs" (gather)="gather()"></building-panel>
+    <building-panel class="buildingPanel" [buildings]="gameObjectService.buildings" [jobs]="gameObjectService.jobs" [sciences]="gameObjectService.sciences" (gather)="gather()"></building-panel>
     <event-panel class="eventPanel" [events]="events"></event-panel>
 </div>

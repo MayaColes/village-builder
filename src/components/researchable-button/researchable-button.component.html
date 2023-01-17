@@ -1,0 +1,7 @@
+<button class="button" 
+        (mouseenter)="showTooltip = true"
+        (mouseleave)="showTooltip = false" 
+        (click)="researchable.research()">
+    {{ researchable.name }} 
+</button>
+<tooltip *ngIf="showTooltip" [gameObject]="researchable" type="buildable"></tooltip>

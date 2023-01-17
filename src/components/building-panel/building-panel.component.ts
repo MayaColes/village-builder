@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Building } from 'src/game-objects/building/building';
 import { Job } from 'src/game-objects/job/job';
+import { Researchable } from 'src/game-objects/researchable/researchable';
 
 @Component({
   selector: 'building-panel',
@@ -11,6 +12,8 @@ export class BuildingPanelComponent {
   @Input() buildings : Building[];
 
   @Input() jobs : Job[];
+
+  @Input() sciences : Researchable[];
 
   @Output() gather = new EventEmitter<void>();
 
