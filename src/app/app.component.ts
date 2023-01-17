@@ -28,6 +28,27 @@ export class AppComponent implements OnInit {
     this.gameObjectService.produceResources();
   }
 
+  gather(){
+    let random = Math.random() * 100;
+    let affectedResourceName = '';
+
+    if(random < 70){
+      affectedResourceName = 'Berries';
+    }
+    else if(random < 90){
+      affectedResourceName = 'Ice';
+    }
+    else{
+      affectedResourceName = 'Wood';
+    }
+
+    let resource = this.gameObjectService.resources.find(obj => obj.name === affectedResourceName)
+
+    if(resource){
+      resource.amount++;
+    }
+  }
+
   ngOnDestroy() {
     this.subscription && this.subscription.unsubscribe();
   }

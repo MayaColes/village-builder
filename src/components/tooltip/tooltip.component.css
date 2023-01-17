@@ -1,12 +1,15 @@
-.tooltipPadding {
+.tooltipFormat {
     background: white;
     padding: 5px;
     border: solid gray;
     border-width: 1px;
     border-radius: 5px;
     position: absolute;
-    width: 300px;
     display: flex;
+}
+
+.tooltipWidth {
+    width: 300px;
 }
 
 .tooltip {

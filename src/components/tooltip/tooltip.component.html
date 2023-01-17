@@ -1,5 +1,5 @@
-<div class="tooltipPadding">
-    <div *ngIf="type !== 'resource'" class="widthFormat">
+<div [ngClass]="{'tooltipWidth': type !== 'text', 'tooltipFormat': true}">
+    <div *ngIf="type !== 'resource' && type !== 'text'" class="widthFormat">
         <div class="tooltip">{{ gameObject.toolTipText }}</div>
         <div class="smallSpace"></div>
         <div class="line"></div>
@@ -22,5 +22,8 @@
             <div class="smallSpace"></div>
             <div class="secondaryTooltip">{{ gameObject.secondaryToolTip }}</div>
         </div>
+    </div>
+    <div *ngIf="type === 'text'" class="tooltip">
+        {{ gameObject }}
     </div>
 </div>

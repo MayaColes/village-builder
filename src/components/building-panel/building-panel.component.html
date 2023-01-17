@@ -6,6 +6,11 @@
     </div>
     <div class="buttonContainer" *ngIf="currentTab === 0">
         <div class="column">
+            <button class="buttonFormat button" (click)="doGather()" 
+                    (mouseenter)="showGatherTooltip = true" (mouseleave)="showGatherTooltip = false">
+                Gather
+            </button>
+            <tooltip *ngIf="showGatherTooltip" gameObject="Pick something up off the ground" type="text"></tooltip>
             <div *ngFor="let building of buildings; let i = index;" [ngClass]="{'buttonFormat': i % 2 === 0}">
                 <building-button *ngIf="i % 2 === 0"
                                  [allResources]="getAllResources()"
