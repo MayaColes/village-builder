@@ -48,7 +48,7 @@ export class CraftableResource {
         if(this.checkCraftable(numberCrafted)){
             for(let required of this.resourcesRequired){
                 let resource = this.usedResources_.find(obj => {
-                    obj.name === required.name;
+                    return obj.name === required.name;
                 })
                 if(resource){
                     resource.amount -= required.price;
@@ -61,10 +61,10 @@ export class CraftableResource {
     checkCraftable(numberCrafted : number){
         for(let required of this.resourcesRequired){
             let resource = this.usedResources_.find(obj => {
-                obj.name === required.name;
+                return obj.name === required.name;
             })
 
-            if(!(resource && (resource.amount < (required.price * numberCrafted)))) {
+            if(!resource || (resource && (resource.amount < (required.price * numberCrafted)))) {
                 return false;
             }
         }
