@@ -32,6 +32,8 @@ export class GameObjectsService {
 
   civilizations = civilizations;
 
+  bears : Resource;
+
   freeBears = 0;
 
   freeBearsSubject : Subject<number>;
@@ -43,18 +45,21 @@ export class GameObjectsService {
   initFromLocalStorage(){
     resources.forEach((resource) => {
       let gameObjectInfo = localStorage.getItem(resource.name);
+      let newResource = undefined;
 
       if(gameObjectInfo){
         let gameObjectValues = JSON.parse(gameObjectInfo);
-        this.resources.push(new Resource(resource, gameObjectValues.amount, gameObjectValues.isVisible));
-
-        if(resource.name === 'Bears'){
-          this.freeBears = gameObjectValues.amount;
-        }
+        newResource = new Resource(resource, gameObjectValues.amount, gameObjectValues.isVisible)
       }
       else {
-        this.resources.push(new Resource(resource, 0, false));
+        newResource = new Resource(resource, 0, false);
       }
+
+      if(resource.name === 'Bears'){
+        this.freeBears = newResource.amount;
+        this.bears = newResource
+      }
+      this.resources.push(newResource);
     })
 
     craftableResources.forEach((craftableResource) => {
@@ -151,6 +156,12 @@ export class GameObjectsService {
 
   updateFreeBears(freeBears : number){
     this.freeBears = freeBears;
+    this.freeBearsSubject.next(this.freeBears);
+  }
+
+  addBear() {
+    this.freeBears++;
+    this.bears.amount++;
     this.freeBearsSubject.next(this.freeBears);
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { EventService } from 'src/services/event.service';
 import { GameObjectsService } from 'src/services/game-objects.service';
 
 @Component({
@@ -14,18 +15,11 @@ export class AppComponent implements OnInit {
 
   subscription : Subscription;
 
-  constructor (public gameObjectService : GameObjectsService) {}
+  constructor (public gameObjectService : GameObjectsService, public eventService : EventService) {}
 
   ngOnInit(){
     this.gameObjectService.initFromLocalStorage();
     this.gameObjectService.calculateInitialValues();
-    this.subscription = interval(1000).subscribe(val => {
-      this.doOnTick();
-    })
-  }
-
-  doOnTick(){
-    this.gameObjectService.produceResources();
   }
 
   gather(){
@@ -50,6 +44,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription && this.subscription.unsubscribe();
+    this.eventService.stop();
   }
 }
