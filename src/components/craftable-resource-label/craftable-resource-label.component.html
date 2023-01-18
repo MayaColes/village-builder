@@ -1,5 +1,5 @@
 <div class="container">
     <span> {{craftableResource.name}}</span>
-    <span>{{craftableResource.amount}}</span>
+    <span>{{ formatService.round(craftableResource.amount) }}</span>
     <div class="craftButton" click="craftableResource.craft(1)">+</div>
 </div>

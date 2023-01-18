@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Resource } from 'src/game-objects/resource/resource';
+import { FormatService } from 'src/services/format.service';
 
 @Component({
   selector: 'resource-label',
@@ -8,4 +9,6 @@ import { Resource } from 'src/game-objects/resource/resource';
 })
 export class ResourceLabelComponent {
   @Input() resource : Resource;
+
+  constructor(public formatService : FormatService){}
 }

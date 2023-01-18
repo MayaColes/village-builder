@@ -1,4 +1,6 @@
 <div class="container">
     <span style="color: {{resource.color}}"> {{resource.name}}</span>
-    <span class="right-align">{{resource.amount}}/{{resource.maximum}}</span>
+    <span class="right-align">
+        {{formatService.round(resource.amount)}}/{{formatService.round(resource.maximum)}}
+    </span>
 </div>
