@@ -56,7 +56,7 @@ export class Building {
                     return obj.name === required.name;
                 })
                 if(resource){
-                    resource.amount -= required.price;
+                    resource.changeAmount(-required.price);
                 }
             }
             this.numberBuilt_++;

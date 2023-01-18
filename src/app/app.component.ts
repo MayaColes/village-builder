@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
     let resource = this.gameObjectService.resources.find(obj => obj.name === affectedResourceName)
 
     if(resource){
-      resource.amount++;
+      resource.changeAmount(1);
     }
   }
 

@@ -40,7 +40,7 @@ export class Researchable {
                     return obj.name === required.name;
                 })
                 if(resource){
-                    resource.amount -= required.price;
+                    resource.changeAmount(-required.price);
                 }
             }
             this.isResearched_ = true;

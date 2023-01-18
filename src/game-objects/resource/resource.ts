@@ -22,10 +22,16 @@ export class Resource {
     }
 
     addCurrentProduction(){
+        this.changeAmount(this.currentProduction)
+    }
+
+    changeAmount(amount : number){
+        if(amount === 0) return;
+        
         if((this.amount_ + this.currentProduction_) <= this.maximum && 
             (this.amount_ + this.currentProduction_) >= 0){
             
-            this.amount_ += this.currentProduction_;
+            this.amount_ += amount;
         }
         else if((this.amount_ + this.currentProduction_) < 0){
             this.amount_ = 0;
@@ -33,13 +39,13 @@ export class Resource {
         else{
             this.amount_ = this.maximum_;
         }
+
+        this.isVisible_ = true;
     }
 
     set currentProduction(production : number) { this.currentProduction_ = production }
 
     set maximum(maximum : number) { this.maximum_ = maximum }
-
-    set amount(amount : number) { this.amount_ = amount }
 
     get currentProduction() { return this.currentProduction_ }
 

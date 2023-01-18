@@ -51,10 +51,10 @@ export class CraftableResource {
                     return obj.name === required.name;
                 })
                 if(resource){
-                    resource.amount -= required.price;
+                    resource.changeAmount(-required.price);
                 }
             }
-            this.amount += numberCrafted;
+            this.amount_ += numberCrafted;
         }
     }
 
@@ -76,7 +76,15 @@ export class CraftableResource {
         return this.usedResources_.find(obj => obj.name === resourceName)
     }
 
-    set amount(amount : number) { this.amount_ = amount }
+    changeAmount(amount : number){
+        if(this.amount + amount > 0){
+            this.amount_ += amount;
+        }
+        else{
+            this.amount_ = 0;
+        }
+        this.isVisible_ = true;
+    }
 
     get amount() { return this.amount_ }
 

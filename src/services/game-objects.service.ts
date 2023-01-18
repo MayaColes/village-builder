@@ -174,7 +174,7 @@ export class GameObjectsService {
 
   addBear() {
     this.freeBears++;
-    this.bears.amount++;
+    this.bears.changeAmount(1);
     this.freeBearsSubject.next(this.freeBears);
   }
 
