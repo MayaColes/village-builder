@@ -131,6 +131,10 @@ export class GameObjectsService {
       newJob.freeBearsChanges.subscribe(({
         next: (freeBears) => this.updateFreeBears(freeBears)
       }))
+
+      newJob.effectsSubject.subscribe({
+        next: (effects) => this.addEffects(effects.effects, effects.amount)
+      })
       
       this.jobs.push(newJob)
     })
@@ -174,7 +178,7 @@ export class GameObjectsService {
     this.freeBearsSubject.next(this.freeBears);
   }
 
-  addEffects(effects : Effect[]){
+  addEffects(effects : Effect[], timesApplied : number = 1){
     for(let effect of effects){
       if(effect.objectType === 'resource'){
         let affectedGameObject = this.resources.find(obj => {
@@ -182,10 +186,10 @@ export class GameObjectsService {
         })
 
         if(affectedGameObject && effect.type === 'production'){
-          affectedGameObject.currentProduction += effect.amount;
+          affectedGameObject.currentProduction += effect.amount * timesApplied;
         }
         else if(affectedGameObject && effect.type === 'maximum'){
-          affectedGameObject.maximum += effect.amount;
+          affectedGameObject.maximum += effect.amount * timesApplied;
         }
       }
       else{
@@ -206,21 +210,21 @@ export class GameObjectsService {
         if(!affectedGameObjectEffect){
           affectedGameObject.effects.push({
               type: "production",
-              amount: effect.type === 'bonus' ? 0 : effect.amount,
+              amount: effect.type === 'bonus' ? 0 : effect.amount * timesApplied,
               objectType: 'resource',
               object: effect.resource || '',
-              bonus: effect.type === 'bonus' ? effect.amount : 0
+              bonus: effect.type === 'bonus' ? effect.amount * timesApplied : 0
           })
         }
         else{
           if(effect.type === 'production'){
-            affectedGameObjectEffect.amount += effect.amount;
+            affectedGameObjectEffect.amount += effect.amount * timesApplied;
           }
           else if(effect.type === 'bonus'){
             if(!affectedGameObjectEffect.bonus){
                 affectedGameObjectEffect['bonus'] = 0;
             }
-            affectedGameObjectEffect.amount += effect.amount;
+            affectedGameObjectEffect.amount += effect.amount * timesApplied;
           }
         }
       }

@@ -6,7 +6,7 @@ export class Job {
     public readonly toolTipText: string
     public readonly effects: Effect[]
 
-    public readonly subject: Subject<Effect[]>;
+    public readonly effectsSubject: Subject<{amount  : number, effects: Effect[]}>;
     public readonly freeBearsChanges: Subject<number>;
 
     numberWorking_: number;
@@ -23,7 +23,7 @@ export class Job {
         this.numberWorking_ = numberWorking;
         this.isVisible_ = isVisible;
 
-        this.subject = new Subject<Effect[]>();
+        this.effectsSubject = new Subject<{amount  : number, effects: Effect[]}>();
         this.freeBearsChanges = new Subject<number>();
 
         freeBearsSubject.subscribe(({
@@ -36,6 +36,7 @@ export class Job {
             this.freeBears_ -= change;
             this.numberWorking_ += change;
             this.freeBearsChanges.next(this.freeBears_)
+            this.effectsSubject.next({amount: change, effects: this.effects})
         }
     }
 
