@@ -14,8 +14,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": -1,
+      "dependancyName": "",
       "name": "Ice Hut",
       "resourcesRequired": [
         {name: 'Ice', price: 10, isCraftable: false},
@@ -34,8 +33,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": -1,
+      "dependancyName": "",
       "name": "Berry Field",
       "resourcesRequired": [
         {name: 'Berries', price: 10, isCraftable: false},
@@ -61,8 +59,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": -1,
+      "dependancyName": "",
       "name": "Library",
       "resourcesRequired": [
         {name: 'Wood', price: 20, isCraftable: false},
@@ -89,8 +86,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 3,
+      "dependancyName": "Mining",
       "name": "Mine",
       "resourcesRequired": [
         {name: 'Wood', price: 50, isCraftable: false},
@@ -121,8 +117,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": true,
-      "hasScienceDependancy": true,
-      "dependancy": -1,
+      "dependancyName": "",
       "name": "Bonfire",
       "resourcesRequired": [
         {name: 'Wood', price: 10, isCraftable: false},
@@ -148,8 +143,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 6,
+      "dependancyName": "Spell Casting",
       "name": "Tower",
 
       "resourcesRequired": [
@@ -200,8 +194,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 1,
+      "dependancyName": "Agriculture",
       "name": "Storage Shed",
       "resourcesRequired": [
         {name: 'Wood', price: 30, isCraftable: false},
@@ -232,8 +225,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": true,
-      "hasScienceDependancy": true,
-      "dependancy": 4,
+      "dependancyName": "Metal Work",
       "name": "Smeltery",
       "resourcesRequired": [
         {name: 'Stone', price: 250, isCraftable: false},
@@ -259,8 +251,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 5,
+      "dependancyName": "Writing",
       "name": "School",
       "resourcesRequired": [
         {name: 'Wood', price: 100, isCraftable: false},
@@ -280,8 +271,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 7,
+      "dependancyName": "Construction",
       "name": "Tinkerer's Station",
       "resourcesRequired": [
         {name: 'Wood', price: 50, isCraftable: false},
@@ -307,8 +297,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 7,
+      "dependancyName": "Construction",
       "name": "Well",
       "resourcesRequired": [
         {name: 'Stone', price: 300, isCraftable: false},
@@ -352,8 +341,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 7,
+      "dependancyName": "Construction",
       "name": "Warehouse",
       "resourcesRequired": [
         {name: 'Beam', price: 3, isCraftable: true},
@@ -374,8 +362,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 7,
+      "dependancyName": "Construction",
       "name": "Cabin",
       "resourcesRequired": [
         {name: 'Wood', price: 120, isCraftable: false},
@@ -396,8 +383,7 @@ export const buildings : BuildingBase[] = [
         }
       ],
       "isEnablable": false,
-      "hasScienceDependancy": true,
-      "dependancy": 9,
+      "dependancyName": "Engineering",
       "name": "Aquaduct",
       "resourcesRequired": [
         {name: 'Stone', price: 100, isCraftable: false},

@@ -40,6 +40,8 @@ export class Researchable {
                     resource.amount -= required.price;
                 }
             }
+            this.isResearched_ = true;
+            this.isVisible_ = false;
             this.researchedSubject.next();
         }
     }
@@ -65,6 +67,9 @@ export class Researchable {
             research.researchedSubject.subscribe(({
                 next: () => this.isVisible_ = true
             }))
+        }
+        else if(!this.isResearched){
+            this.isVisible_ = true;
         }
     }
 

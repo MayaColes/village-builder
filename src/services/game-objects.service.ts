@@ -75,7 +75,24 @@ export class GameObjectsService {
       }
     })
 
-    this.craftableResources.forEach((craftableResource) => craftableResource.initializeUsedResources(this.resources, this.craftableResources))
+    this.craftableResources.forEach((craftableResource) => craftableResource.initializeUsedResources(this.resources, this.craftableResources));
+
+    sciences.forEach((science) => {
+      let gameObjectInfo = localStorage.getItem(science.name);
+      let newScience = null;
+
+      if(gameObjectInfo){
+        let gameObjectValues = JSON.parse(gameObjectInfo);
+        newScience = new Researchable(science, gameObjectValues.isResearched, gameObjectValues.isVisible, this.resources, this.craftableResources);
+      }
+      else{
+        newScience = new Researchable(science, false, false, this.resources, this.craftableResources);
+      }
+
+      this.sciences.push(newScience)
+    })
+
+    this.sciences.forEach((science) => science.initDependency(this.sciences))
 
     buildings.forEach((building) => {
       let gameObjectInfo = localStorage.getItem(building.name);
@@ -83,12 +100,12 @@ export class GameObjectsService {
 
       if(gameObjectInfo){
         let gameObjectValues = JSON.parse(gameObjectInfo);
-        newBuilding =new Building(building, gameObjectValues.numberBuilt, 
+        newBuilding = new Building(building, gameObjectValues.numberBuilt, 
                                   gameObjectValues.numberEnabled, gameObjectValues.isVisible,
-                                  this.resources, this.craftableResources);
+                                  this.resources, this.craftableResources, this.sciences);
       }
       else{
-        newBuilding = new Building(building, 0, 0, false, this.resources, this.craftableResources);
+        newBuilding = new Building(building, 0, 0, false, this.resources, this.craftableResources, this.sciences);
       }
       
       newBuilding.subject.subscribe(({
@@ -119,23 +136,6 @@ export class GameObjectsService {
     })
 
     this.freeBearsSubject.next(this.freeBears);
-
-    sciences.forEach((science) => {
-      let gameObjectInfo = localStorage.getItem(science.name);
-      let newScience = null;
-
-      if(gameObjectInfo){
-        let gameObjectValues = JSON.parse(gameObjectInfo);
-        newScience = new Researchable(science, gameObjectValues.isResearched, gameObjectValues.isVisible, this.resources, this.craftableResources);
-      }
-      else{
-        newScience = new Researchable(science, false, false, this.resources, this.craftableResources);
-      }
-
-      this.sciences.push(newScience)
-    })
-
-    this.sciences.forEach((science) => science.initDependency(this.sciences))
 
     this.upgrades.forEach((upgrade) => {
       let didInit = this.storageService.initObjFromLocalStorage(upgrade, upgrade.name);

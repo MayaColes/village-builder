@@ -30,8 +30,10 @@
     </div>
     <div class="outline" *ngIf="currentTab === 2">
         <div class="scienceContainer">
-            <div *ngFor="let science of sciences" class="scienceFormat">
-                <researchable-button [researchable]="science"></researchable-button>
+            <div *ngFor="let science of sciences">
+                <div class="scienceFormat" *ngIf="science.isVisible">
+                    <researchable-button [researchable]="science"></researchable-button>
+                </div>
             </div>
         </div>
     </div>

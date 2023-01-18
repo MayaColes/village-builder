@@ -1,6 +1,7 @@
 import { Subject } from "rxjs";
 import { BuildingBase, Effect } from "src/app/data-interfaces";
 import { CraftableResource } from "../craftable-resource/craftable-resource";
+import { Researchable } from "../researchable/researchable";
 import { Resource } from "../resource/resource";
 
 export class Building {
@@ -11,7 +12,7 @@ export class Building {
     public readonly effects: Effect[]
     public readonly isEnablable: boolean
     public readonly hasScienceDependancy: boolean
-    public readonly dependancy: number
+    public readonly dependancyName: string;
     public readonly resourcesRequired: {name: string, price: number, isCraftable: boolean}[]
 
     numberBuilt_ : number;
@@ -23,7 +24,8 @@ export class Building {
 
     constructor(info : BuildingBase, numberBuilt : number, 
                 numberEnabled : number, isVisible : boolean, 
-                allResources : Resource[], allCraftableResources : CraftableResource[], ){
+                allResources : Resource[], allCraftableResources : CraftableResource[],
+                allSciences: Researchable[] ){
         
         this.name = info.name;
         this.increaseRatio = info.increaseRatio;
@@ -32,6 +34,7 @@ export class Building {
         this.effects = info.effects;
         this.isEnablable = info.isEnablable;
         this.resourcesRequired = info.resourcesRequired;
+        this.dependancyName = info.dependancyName;
         
         this.numberBuilt_ = numberBuilt;
         this.numberEnabled_ = numberEnabled;
@@ -40,7 +43,8 @@ export class Building {
         this.subject = new Subject<Effect[]>();
 
         this.usedResources_ = [];
-        this.findUsedResources(allResources, allCraftableResources)
+        this.findUsedResources(allResources, allCraftableResources);
+        this.observeDependency(allSciences)
     }
 
     build(){
@@ -95,6 +99,16 @@ export class Building {
                 this.usedResources_.push(resource);
             }
         })
+    }
+
+    private observeDependency(allSciences : Researchable[]){
+        let science = allSciences.find(obj => obj.name === this.dependancyName)
+
+        if(science){
+            science.researchedSubject.subscribe(({
+                next: () => this.isVisible_ = true
+            }))
+        }
     }
 
     get numberBuilt() : number { return this.numberBuilt_ }

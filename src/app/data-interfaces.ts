@@ -5,8 +5,7 @@ export interface BuildingBase {
     secondaryToolTip: string,
     effects: Effect[],
     isEnablable: boolean,
-    hasScienceDependancy: boolean,
-    dependancy: number,
+    dependancyName: string,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
 }
 
