@@ -8,14 +8,12 @@ import { Resource } from 'src/game-objects/resource/resource';
   styleUrls: ['./tooltip-price-info.component.css']
 })
 export class TooltipPriceInfoComponent implements OnInit {
-  @Input() resource : Resource | CraftableResource;
-
-  @Input() price : number;
+  @Input() resourceInfo : {resource : Resource | CraftableResource, price: number};
 
   isCraftable = false;
 
   ngOnInit(){
-    if(this.resource instanceof CraftableResource){
+    if(this.resourceInfo.resource instanceof CraftableResource){
       this.isCraftable = true;
     }
   }

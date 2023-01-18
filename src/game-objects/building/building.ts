@@ -18,7 +18,7 @@ export class Building {
     numberBuilt_ : number;
     numberEnabled_ : number;
     isVisible_ : boolean;
-    usedResources_ : (Resource | CraftableResource)[]
+    usedResources_ : {resource: (Resource | CraftableResource), price : number}[]
 
     public readonly subject : Subject<Effect[]>;
     public readonly isVisibleSubject : Subject<void>;
@@ -51,13 +51,9 @@ export class Building {
 
     build(){
         if(this.checkBuildable(1)){
-            for(let required of this.resourcesRequired){
-                let resource = this.usedResources_.find(obj => {
-                    return obj.name === required.name;
-                })
-                if(resource){
-                    resource.changeAmount(-required.price);
-                }
+            for(let usedResource of this.usedResources_){
+                usedResource.resource.changeAmount(-usedResource.price);
+                usedResource.price *= this.increaseRatio;
             }
             this.numberBuilt_++;
             this.subject.next(this.effects);
@@ -65,12 +61,8 @@ export class Building {
     }
 
     checkBuildable(numberBuilt : number){
-        for(let required of this.resourcesRequired){
-            let resource = this.usedResources_.find(obj => {
-                return obj.name === required.name;
-            })
-
-            if(!resource || (resource && (resource.amount < (required.price * numberBuilt)))) {
+        for(let usedResource of this.usedResources_){
+            if(usedResource.resource.amount < (usedResource.price * numberBuilt)) {
                 return false;
             }
         }
@@ -79,7 +71,7 @@ export class Building {
     }
 
     findUsedResource(name : string) {
-        return this.usedResources_.find(obj => obj.name === name)
+        return this.usedResources_.find(obj => obj.resource.name === name)
     }
 
     private findUsedResources(allResources : Resource[], allCraftableResources : CraftableResource[]){
@@ -98,7 +90,7 @@ export class Building {
             }
 
             if(resource){
-                this.usedResources_.push(resource);
+                this.usedResources_.push({resource: resource, price: required.price});
             }
         })
     }

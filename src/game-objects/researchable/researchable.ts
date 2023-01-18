@@ -13,7 +13,7 @@ export class Researchable {
 
     isResearched_ : boolean;
     isVisible_ : boolean;
-    usedResources_ : (Resource | CraftableResource)[] = [];
+    usedResources_ : {resource : (Resource | CraftableResource), price : number}[] = [];
 
     constructor( info : ResearchableBase, isResearched : boolean, isVisible : boolean, 
                 allResources : Resource[], allCraftableResources : CraftableResource[], ) {
@@ -35,13 +35,8 @@ export class Researchable {
             this.isVisible_ = false;
             this.researchedSubject.next();
         if(this.checkResearchable() && !this.isResearched && this.isVisible){
-            for(let required of this.resourcesRequired){
-                let resource = this.usedResources_.find(obj => {
-                    return obj.name === required.name;
-                })
-                if(resource){
-                    resource.changeAmount(-required.price);
-                }
+            for(let used of this.usedResources_){
+                used.resource.changeAmount(-used.price);
             }
             this.isResearched_ = true;
             this.isVisible_ = false;
@@ -50,12 +45,8 @@ export class Researchable {
     }
 
     checkResearchable(){
-        for(let required of this.resourcesRequired){
-            let resource = this.usedResources_.find(obj => {
-                return obj.name === required.name;
-            })
-
-            if(!resource || (resource && (resource.amount < (required.price)))) {
+        for(let used of this.usedResources_){
+            if(used.resource.amount < (used.price)) {
                 return false;
             }
         }
@@ -77,7 +68,7 @@ export class Researchable {
     }
 
     findUsedResource(name : string) {
-        return this.usedResources_.find(obj => obj.name === name)
+        return this.usedResources_.find(obj => obj.resource.name === name)
     }
 
     private initUsedResources(allResources : Resource[], allCraftableResources : CraftableResource[]){
@@ -96,7 +87,7 @@ export class Researchable {
             }
 
             if(resource){
-                this.usedResources_.push(resource);
+                this.usedResources_.push({resource: resource, price: required.price});
             }
         })
     }

@@ -5,8 +5,7 @@
         <div class="line"></div>
         <div class="mediumSpace"></div>
         <div *ngFor="let resourceRequired of gameObject.resourcesRequired;">
-            <tooltip-price-info [resource]="gameObject.findUsedResource(resourceRequired.name)"
-                                [price]="resourceRequired.price">
+            <tooltip-price-info [resourceInfo]="gameObject.findUsedResource(resourceRequired.name)">
             </tooltip-price-info>
         </div>
         <div *ngIf="gameObject.effects && gameObject.effects.length">
