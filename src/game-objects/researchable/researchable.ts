@@ -31,6 +31,9 @@ export class Researchable {
     }
 
     research(){
+        this.isResearched_ = true;
+            this.isVisible_ = false;
+            this.researchedSubject.next();
         if(this.checkResearchable() && !this.isResearched && this.isVisible){
             for(let required of this.resourcesRequired){
                 let resource = this.usedResources_.find(obj => {

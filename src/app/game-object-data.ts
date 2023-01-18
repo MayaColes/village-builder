@@ -23,7 +23,7 @@ export const buildings : BuildingBase[] = [
     {
       "increaseRatio": 1.25,
       "toolTipText": "Produces Berries.",
-      "secondaryToolTip": "No snacking",
+      "secondaryToolTip": "For harvesting bear-ries",
       "effects": [
         {
           "type": "production",

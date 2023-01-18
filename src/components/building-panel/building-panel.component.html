@@ -11,13 +11,17 @@
                 Gather
             </button>
             <tooltip *ngIf="showGatherTooltip" gameObject="Pick something up off the ground" type="text"></tooltip>
-            <div *ngFor="let building of buildings; let i = index;" [ngClass]="{'buttonFormat': i % 2 === 0}">
-                <building-button *ngIf="i % 2 === 0" [building]="building"></building-button>
+            <div *ngFor="let building of visibleBuildings; let i = index;">
+                <div [ngClass]="{'buttonFormat': i % 2 === 1}" *ngIf="building.isVisible">
+                    <building-button *ngIf="i % 2 === 1" [building]="building"></building-button>
+                </div>
             </div>
         </div>
         <div class="column">
-            <div *ngFor="let building of buildings; let i = index;" [ngClass]="{'buttonFormat': i % 2 === 1}">
-                <building-button *ngIf="i % 2 === 1" [building]="building"></building-button>
+            <div *ngFor="let building of visibleBuildings; let i = index;">
+                <div [ngClass]="{'buttonFormat': i % 2 === 0}" *ngIf="building.isVisible">
+                    <building-button *ngIf="i % 2 === 0" [building]="building"></building-button>
+                </div>
             </div>
         </div>
     </div>

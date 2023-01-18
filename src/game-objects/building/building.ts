@@ -21,6 +21,7 @@ export class Building {
     usedResources_ : (Resource | CraftableResource)[]
 
     public readonly subject : Subject<Effect[]>;
+    public readonly isVisibleSubject : Subject<void>;
 
     constructor(info : BuildingBase, numberBuilt : number, 
                 numberEnabled : number, isVisible : boolean, 
@@ -41,6 +42,7 @@ export class Building {
         this.isVisible_ = isVisible;
 
         this.subject = new Subject<Effect[]>();
+        this.isVisibleSubject = new Subject<void>();
 
         this.usedResources_ = [];
         this.findUsedResources(allResources, allCraftableResources);
@@ -104,10 +106,16 @@ export class Building {
     private observeDependency(allSciences : Researchable[]){
         let science = allSciences.find(obj => obj.name === this.dependancyName)
 
-        if(science){
+        if(science && this.dependancyName !== ''){
             science.researchedSubject.subscribe(({
-                next: () => this.isVisible_ = true
+                next: () => {
+                    this.isVisible_ = true;
+                    this.isVisibleSubject.next();
+                }
             }))
+        }
+        else{
+            this.isVisible_ = true;
         }
     }
 
