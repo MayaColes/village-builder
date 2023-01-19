@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
 import { EventService } from 'src/services/event.service';
 import { GameObjectsService } from 'src/services/game-objects.service';
 
@@ -10,10 +9,6 @@ import { GameObjectsService } from 'src/services/game-objects.service';
 })
 export class AppComponent implements OnInit {
   title = 'Polar-Bear-Game-V2';
-
-  events : {time: number, text: string}[] = [];
-
-  subscription : Subscription;
 
   constructor (public gameObjectService : GameObjectsService, public eventService : EventService) {}
 

@@ -10,5 +10,7 @@ import { FormatService } from 'src/services/format.service';
 export class ResourceLabelComponent {
   @Input() resource : Resource;
 
+  showTooltip = false;
+
   constructor(public formatService : FormatService){}
 }

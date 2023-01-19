@@ -1,4 +1,4 @@
-<div [ngClass]="{'tooltipWidth': type !== 'text', 'tooltipFormat': true}">
+<div [ngClass]="{'tooltipWidth': type !== 'text' && type !== 'resource', 'tooltipFormat': true}">
     <div *ngIf="type !== 'resource' && type !== 'text'" class="widthFormat">
         <div class="tooltip">{{ gameObject.toolTipText }}</div>
         <div class="smallSpace"></div>
@@ -23,5 +23,13 @@
     </div>
     <div *ngIf="type === 'text'" class="tooltip">
         {{ gameObject }}
+    </div>
+    <div *ngIf="type === 'resource'" class="widthFormat">
+        <div *ngIf="gameObject.currentProduction > 0">
+            Production: {{ formatService.round(gameObject.currentProduction) }}
+        </div>
+        <div *ngIf="gameObject.currentProduction > 0">
+            To Max: {{ formatService.timeUntil((gameObject.maximum - gameObject.amount), gameObject.currentProduction) }}
+        </div>
     </div>
 </div>

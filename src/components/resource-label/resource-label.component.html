@@ -1,6 +1,30 @@
 <div class="container">
-    <span style="color: {{resource.color}}"> {{resource.name}}</span>
-    <span class="right-align">
-        {{formatService.round(resource.amount)}}/{{formatService.round(resource.maximum)}}
-    </span>
+    <div class="section">
+        <span style="color: {{resource.color}}">{{resource.name}}</span>
+    </div>
+    <div class="section">
+        <span>
+            {{formatService.round(resource.amount)}}
+        </span>
+    </div>
+    <div class="section">
+        <span>
+            /{{formatService.round(resource.maximum)}}
+        </span>
+    </div>
+    <div class="section">
+        <span *ngIf="resource.currentProduction > 0" 
+            (mouseenter)="showTooltip = true"
+            (mouseleave)="showTooltip = false" >
+
+            (+{{ formatService.round(resource.currentProduction) }}/sec)
+        </span>
+        <span *ngIf="resource.currentProduction < 0"
+            (mouseenter)="showTooltip = true"
+            (mouseleave)="showTooltip = false" >
+            
+            ({{ formatService.round(resource.currentProduction) }}/sec)
+        </span>
+    </div>
 </div>
+<tooltip *ngIf="showTooltip" [gameObject]="resource" type="resource"></tooltip>
