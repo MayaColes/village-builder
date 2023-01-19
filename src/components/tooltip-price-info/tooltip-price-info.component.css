@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.insufficientMaterial {
+    color: red;
+}
+
 .craftResourceRow {
     display: flex;
     flex-direction: row;

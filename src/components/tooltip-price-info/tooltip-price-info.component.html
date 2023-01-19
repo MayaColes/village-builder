@@ -1,12 +1,22 @@
 <div class="resource">
-    <div class="priceRow" >
+    <div [ngClass]="{'insufficientMaterial': resourceInfo.resource.amount < resourceInfo.price, 'priceRow': true }" >
         <div>{{ resourceInfo.resource.name }}:</div>
-        <div>{{ resourceInfo.price }}</div>
+        <div>
+            <span *ngIf="resourceInfo.resource.amount < resourceInfo.price">
+                {{formatService.round(resourceInfo.resource.amount)}} /
+            </span>
+            {{ formatService.round(resourceInfo.price) }}
+            <span *ngIf="!isCraftable && resourceInfo.resource.amount < resourceInfo.price && $any(resourceInfo).resource.currentProduction > 0">
+                ({{ formatService.timeUntil(resourceInfo.price - resourceInfo.resource.amount, $any(resourceInfo).resource.currentProduction) }})
+            </span>
+        </div>
     </div>
     <div *ngIf="isCraftable">
-        <div *ngFor="let resourceRequired of $any(resourceInfo).resourcesRequired" class="craftResourceRow">
-            <div class="arrowPadding">> </div>
-            <tooltip-price-info [resourceInfo]="$any(resourceInfo).findUsedResource(resourceRequired.name)"
+        <div *ngFor="let resourceRequired of $any(resourceInfo).resource.resourcesRequired" class="craftResourceRow">
+            <div [ngClass]="{'insufficientMaterial': resourceInfo.resource.amount < resourceInfo.price, 'arrowPadding': true }">
+                >
+            </div>
+            <tooltip-price-info [resourceInfo]="$any(resourceInfo).resource.findUsedResource(resourceRequired.name)"
                                 class="craftResource">
             </tooltip-price-info>
         </div>
