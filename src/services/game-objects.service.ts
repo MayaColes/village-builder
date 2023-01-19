@@ -171,9 +171,9 @@ export class GameObjectsService {
     InitializationHelper.calculateResourceProduction(this.resources, this.buildings, this.jobs);
   };
 
-  produceResources(){
+  produceResources(ticksPerSecond : number){
     this.resources.forEach((resource) => {
-      resource.addCurrentProduction();
+      resource.addCurrentProduction(ticksPerSecond);
     })
   }
 

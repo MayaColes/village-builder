@@ -21,8 +21,8 @@ export class Resource {
         this.isVisible_ = isVisible;
     }
 
-    addCurrentProduction(){
-        this.changeAmount(this.currentProduction)
+    addCurrentProduction(tickPerSecond : number){
+        this.changeAmount(this.currentProduction / tickPerSecond)
     }
 
     changeAmount(amount : number){
