@@ -35,6 +35,10 @@ export class GameObjectsService {
 
   bears : Resource;
 
+  berries: Resource;
+
+  water: Resource;
+
   freeBears = 0;
 
   freeBearsSubject : Subject<number>;
@@ -59,6 +63,12 @@ export class GameObjectsService {
       if(resource.name === 'Bears'){
         this.freeBears = newResource.amount;
         this.bears = newResource
+      }
+      else if(resource.name === 'Berries') {
+        this.berries = newResource;
+      }
+      else if(resource.name === 'Water') {
+        this.water = newResource;
       }
       this.resources.push(newResource);
     })
@@ -176,6 +186,28 @@ export class GameObjectsService {
     this.freeBears++;
     this.bears.changeAmount(1);
     this.freeBearsSubject.next(this.freeBears);
+    this.berries.currentProduction -= 4;
+    this.water.currentProduction -= 0.5;
+  }
+
+  removeBear(){
+    if(!this.bears.amount) return;
+
+    if(this.freeBears > 0){
+      this.freeBears--;
+      this.freeBearsSubject.next(this.freeBears);
+    }
+    else{
+      for(let job of this.jobs){
+        if(job.numberWorking > 0){
+          job.changeWorking(-1);
+          break;
+        }
+      }
+    }
+    this.bears.changeAmount(-1);
+    this.berries.currentProduction += 4;
+    this.water.currentProduction += 0.5;
   }
 
   addEffects(effects : Effect[], timesApplied : number = 1){

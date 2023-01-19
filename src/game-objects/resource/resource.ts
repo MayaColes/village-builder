@@ -27,7 +27,7 @@ export class Resource {
 
     changeAmount(amount : number){
         if(amount === 0) return;
-        
+
         if((this.amount_ + this.currentProduction_) <= this.maximum && 
             (this.amount_ + this.currentProduction_) >= 0){
             
@@ -40,7 +40,9 @@ export class Resource {
             this.amount_ = this.maximum_;
         }
 
-        this.isVisible_ = true;
+        if(amount > 0){
+            this.isVisible_ = true;
+        }
     }
 
     set currentProduction(production : number) { this.currentProduction_ = production }

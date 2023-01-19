@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { Resource } from 'src/game-objects/resource/resource';
 import { GameObjectsService } from './game-objects.service';
 
 @Injectable({
@@ -10,6 +11,8 @@ export class EventService {
 
   bearPoints = 0;
 
+  deathPoints = 0;
+
   constructor(public gameObjectService : GameObjectsService) {
     this.subscription = interval(1000).subscribe(val => {
       this.doDailyChecks()
@@ -18,11 +21,12 @@ export class EventService {
 
   doDailyChecks(){
     this.gameObjectService.produceResources();
-    this.checkNewBears();
+    this.checkBearsStatus();
     this.checkDailyEvents();
   }
 
-  checkNewBears(){
+  checkBearsStatus(){
+    // Add bears
     if(this.gameObjectService.bears.amount < this.gameObjectService.bears.maximum &&
       this.bearPoints >= (this.gameObjectService.bears.amount * 5 + 10)){
 
@@ -31,6 +35,18 @@ export class EventService {
     }
     else if(this.gameObjectService.bears.amount < this.gameObjectService.bears.maximum){
       this.bearPoints++;
+    }
+
+    // Kill bears (murderer!))
+    if(this.gameObjectService.bears.amount && 
+      !(this.gameObjectService.berries.amount || this.gameObjectService.water.amount)){
+
+      this.deathPoints++;
+    }
+
+    if(this.deathPoints >= 15){
+      this.gameObjectService.removeBear();
+      this.deathPoints = 0;
     }
   }
 
