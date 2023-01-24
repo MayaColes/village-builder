@@ -186,8 +186,8 @@ export class GameObjectsService {
     this.freeBears++;
     this.bears.changeAmount(1);
     this.freeBearsSubject.next(this.freeBears);
-    this.berries.currentProduction -= 4;
-    this.water.currentProduction -= 0.5;
+    this.berries.changeConsumption(-4);
+    this.water.changeConsumption(-0.5);
   }
 
   removeBear(){
@@ -206,8 +206,8 @@ export class GameObjectsService {
       }
     }
     this.bears.changeAmount(-1);
-    this.berries.currentProduction += 4;
-    this.water.currentProduction += 0.5;
+    this.berries.changeConsumption(4);
+    this.water.changeConsumption(0.5);
   }
 
   addEffects(effects : Effect[], timesApplied : number = 1){
@@ -218,7 +218,12 @@ export class GameObjectsService {
         })
 
         if(affectedGameObject && effect.type === 'production'){
-          affectedGameObject.currentProduction += effect.amount * timesApplied;
+          if(affectedGameObject.amount > 0) {
+            affectedGameObject.changeProduction(effect.amount * timesApplied);
+          }
+          else {
+            affectedGameObject.changeConsumption(effect.amount * timesApplied);
+          }
         }
         else if(affectedGameObject && effect.type === 'maximum'){
           affectedGameObject.maximum += effect.amount * timesApplied;

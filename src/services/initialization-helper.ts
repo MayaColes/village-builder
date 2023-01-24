@@ -64,7 +64,12 @@ export class InitializationHelper {
                         }
                         buildingProduction *= building.isEnablable ? building.numberEnabled : building.numberBuilt;
 
-                        affectedResource.currentProduction += buildingProduction;
+                        if(buildingProduction > 0){
+                            affectedResource.changeProduction(buildingProduction);
+                        }
+                        else{
+                            affectedResource.changeConsumption(buildingProduction);
+                        }
                     }
                 }
             })
@@ -82,11 +87,13 @@ export class InitializationHelper {
                         if(effect.bonus){
                             jobProduction += effect.amount * effect.bonus;
                         }
-                        if(job.numberWorking !== undefined &&
-                            affectedResource.currentProduction !== undefined){
-                            jobProduction *= job.numberWorking;
+                        jobProduction *= job.numberWorking;
 
-                            affectedResource.currentProduction += jobProduction;
+                        if(jobProduction > 0){
+                            affectedResource.changeProduction(jobProduction);
+                        }
+                        else{
+                            affectedResource.changeConsumption(jobProduction);
                         }
                     }
                 }

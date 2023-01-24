@@ -6,6 +6,7 @@ export class Resource {
     public readonly color: string;
 
     currentProduction_: number;
+    currentConsumption_: number;
     maximum_: number;
     amount_: number;
     isVisible_: boolean;
@@ -16,24 +17,25 @@ export class Resource {
         this.color = info.color;
         
         this.currentProduction_ = 0;
+        this.currentConsumption_ = 0;
         this.maximum_ = this.defaultMaximum;
         this.amount_ = amount;
         this.isVisible_ = isVisible;
     }
 
     addCurrentProduction(tickPerSecond : number){
-        this.changeAmount(this.currentProduction / tickPerSecond)
+        this.changeAmount(this.totalProduction/ tickPerSecond)
     }
 
     changeAmount(amount : number){
         if(amount === 0) return;
 
-        if((this.amount_ + this.currentProduction_) <= this.maximum && 
-            (this.amount_ + this.currentProduction_) >= 0){
+        if((this.amount_ + amount) <= this.maximum && 
+            (this.amount_ + amount) >= 0){
             
             this.amount_ += amount;
         }
-        else if((this.amount_ + this.currentProduction_) < 0){
+        else if((this.amount_ + amount) < 0){
             this.amount_ = 0;
         }
         else{
@@ -45,11 +47,31 @@ export class Resource {
         }
     }
 
-    set currentProduction(production : number) { this.currentProduction_ = production }
+    changeProduction(amount : number){
+        if(this.currentProduction_ + amount < 0){
+            this.currentProduction_ = 0;
+        }
+        else{
+            this.currentProduction_ += amount;
+        }
+    }
+
+    changeConsumption(amount : number){
+        if(this.currentConsumption_ + amount > 0){
+            this.currentConsumption_ = 0;
+        }
+        else{
+            this.currentConsumption_ += amount;
+        }
+    }
 
     set maximum(maximum : number) { this.maximum_ = maximum }
 
     get currentProduction() { return this.currentProduction_ }
+
+    get currentConsumption() { return  this.currentProduction_ }
+
+    get totalProduction() { return this.currentProduction_ + this.currentConsumption_ }
 
     get maximum() { return this.maximum_ }
 

@@ -28,8 +28,14 @@
         <div *ngIf="gameObject.currentProduction > 0">
             Production: {{ formatService.round(gameObject.currentProduction) }}
         </div>
-        <div *ngIf="gameObject.currentProduction > 0">
-            To Max: {{ formatService.timeUntil((gameObject.maximum - gameObject.amount), gameObject.currentProduction) }}
+        <div *ngIf="gameObject.currentConsumption > 0">
+            Consumption: {{ formatService.round(gameObject.currentConsumption) }}
+        </div>
+        <div *ngIf="gameObject.totalConsumption > 0">
+            To Max: {{ formatService.timeUntil((gameObject.maximum - gameObject.amount), gameObject.totalProduction) }}
+        </div>
+        <div *ngIf="gameObject.totalConsumption < 0">
+            To Zero: {{ formatService.timeUntil((gameObject.maximum - gameObject.amount), gameObject.totalProduction) }}
         </div>
     </div>
 </div>

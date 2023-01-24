@@ -6,8 +6,8 @@
                 {{formatService.round(resourceInfo.resource.amount)}} /
             </span>
             {{ formatService.round(resourceInfo.price) }}
-            <span *ngIf="!isCraftable && resourceInfo.resource.amount < resourceInfo.price && $any(resourceInfo).resource.currentProduction > 0">
-                ({{ formatService.timeUntil(resourceInfo.price - resourceInfo.resource.amount, $any(resourceInfo).resource.currentProduction) }})
+            <span *ngIf="!isCraftable && resourceInfo.resource.amount < resourceInfo.price && $any(resourceInfo).resource.totalProduction > 0">
+                ({{ formatService.timeUntil(resourceInfo.price - resourceInfo.resource.amount, $any(resourceInfo).resource.totalProduction) }})
             </span>
         </div>
     </div>

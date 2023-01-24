@@ -13,17 +13,17 @@
         </span>
     </div>
     <div class="section">
-        <span *ngIf="resource.currentProduction > 0" 
+        <span *ngIf="resource.totalProduction > 0" 
             (mouseenter)="showTooltip = true"
             (mouseleave)="showTooltip = false" >
 
-            (+{{ formatService.round(resource.currentProduction) }}/sec)
+            (+{{ formatService.round(resource.totalProduction) }}/sec)
         </span>
-        <span *ngIf="resource.currentProduction < 0"
+        <span *ngIf="resource.totalProduction < 0"
             (mouseenter)="showTooltip = true"
             (mouseleave)="showTooltip = false" >
-            
-            ({{ formatService.round(resource.currentProduction) }}/sec)
+
+            ({{ formatService.round(resource.totalProduction) }}/sec)
         </span>
     </div>
 </div>
