@@ -1,10 +1,23 @@
-<button class="button" 
-        (mouseenter)="showTooltip = true"
-        (mouseleave)="showTooltip = false" 
-        (click)="building.build()">
-    {{ building.name }} 
-    <span *ngIf="building.numberBuilt && building.numberBuilt > 0"> 
-        ({{ building.numberBuilt}})
-    </span>
-</button>
+<div class="buttonSet">
+    <button *ngIf="!building.isEnablable" class="nonEnablable button" 
+            (mouseenter)="showTooltip = true"
+            (mouseleave)="showTooltip = false" 
+            (click)="building.build()">
+        {{ building.name }} 
+        <span *ngIf="building.numberBuilt && building.numberBuilt > 0"> 
+            ({{ building.numberBuilt}})
+        </span>
+    </button>
+    <button *ngIf="building.isEnablable" class="enablable button" 
+            (mouseenter)="showTooltip = true"
+            (mouseleave)="showTooltip = false" 
+            (click)="building.build()">
+        {{ building.name }} 
+        <span *ngIf="building.numberBuilt && building.numberBuilt > 0"> 
+            ({{ building.numberEnabled }}/{{ building.numberBuilt}})
+        </span>
+    </button>
+    <button *ngIf="building.isEnablable" class="changeEnabled button" (click)="building.changeEnabled(1)">+</button>
+    <button *ngIf="building.isEnablable" class="changeEnabled button" (click)="building.changeEnabled(-1)">-</button>
+</div>
 <tooltip *ngIf="showTooltip" [gameObject]="building" type="buildable"></tooltip>

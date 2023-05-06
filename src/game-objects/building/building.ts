@@ -20,7 +20,7 @@ export class Building {
     isVisible_ : boolean;
     usedResources_ : {resource: (Resource | CraftableResource), price : number}[]
 
-    public readonly subject : Subject<Effect[]>;
+    public readonly subject : Subject<{effects: Effect[], amount: number}>;
     public readonly isVisibleSubject : Subject<void>;
 
     constructor(info : BuildingBase, numberBuilt : number, 
@@ -41,7 +41,7 @@ export class Building {
         this.numberEnabled_ = numberEnabled;
         this.isVisible_ = isVisible;
 
-        this.subject = new Subject<Effect[]>();
+        this.subject = new Subject<{effects: Effect[], amount: number}>();
         this.isVisibleSubject = new Subject<void>();
 
         this.usedResources_ = [];
@@ -56,7 +56,8 @@ export class Building {
                 usedResource.price *= this.increaseRatio;
             }
             this.numberBuilt_++;
-            this.subject.next(this.effects);
+            this.numberEnabled_++;
+            this.subject.next({effects : this.effects, amount: 1});
         }
     }
 
@@ -72,6 +73,15 @@ export class Building {
 
     findUsedResource(name : string) {
         return this.usedResources_.find(obj => obj.resource.name === name)
+    }
+
+    changeEnabled(amount : number){
+        if(this.numberEnabled_ + amount >= 0
+            && this.numberEnabled_ + amount <= this.numberBuilt){
+
+            this.numberEnabled_ += amount;
+            this.subject.next({effects : this.effects, amount: amount});
+        }
     }
 
     private findUsedResources(allResources : Resource[], allCraftableResources : CraftableResource[]){

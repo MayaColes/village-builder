@@ -119,7 +119,7 @@ export class GameObjectsService {
       }
       
       newBuilding.subject.subscribe(({
-        next: (effects) => this.addEffects(effects)
+        next: (values : any) => this.addEffects(values.effects, values.amount)
       }))
 
       this.buildings.push(newBuilding)
@@ -218,7 +218,7 @@ export class GameObjectsService {
         })
 
         if(affectedGameObject && effect.type === 'production'){
-          if(affectedGameObject.amount > 0) {
+          if(effect.amount > 0) {
             affectedGameObject.changeProduction(effect.amount * timesApplied);
           }
           else {

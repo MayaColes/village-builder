@@ -2,10 +2,28 @@
     border-style: solid;
     border-color: gray;
     border-radius: 5px;
-    width: 100%;
     border-width: 1px;
     background-color: white;
     height: 40px
+}
+
+.buttonSet {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nonEnablable {
+    width: 100%;
+}
+
+.enablable {
+    width: 60%;
+}
+
+.changeEnabled {
+    width: 15%;
 }
 
 .button:hover {
