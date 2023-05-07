@@ -121,6 +121,10 @@ export class Building {
         }
     }
 
+    getSaveValues() {
+        return {numberBuilt: this.numberBuilt, numberEnabled: this.numberEnabled, isVisible: this.isVisible}
+    }
+
     get numberBuilt() : number { return this.numberBuilt_ }
 
     get numberEnabled() : number { return this.numberEnabled_ }

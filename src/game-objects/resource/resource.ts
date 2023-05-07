@@ -65,6 +65,10 @@ export class Resource {
         }
     }
 
+    getSaveValues() {
+        return {amount: this.amount, maximum: this.maximum, isVisible: this.isVisible}
+    }
+
     set maximum(maximum : number) { this.maximum_ = maximum }
 
     get currentProduction() { return this.currentProduction_ }

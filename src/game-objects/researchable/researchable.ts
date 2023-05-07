@@ -92,6 +92,10 @@ export class Researchable {
         })
     }
 
+    getSaveValues() {
+        return {isResearched: this.isResearched, isVisible: this.isVisible}
+    }
+
     get isResearched() { return this.isResearched_ }
 
     get isVisible() { return this.isVisible_ }

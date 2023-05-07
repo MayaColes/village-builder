@@ -22,4 +22,8 @@ export class StorageService {
       return true;
     }
   }
+
+  saveObjToLocalStorage(gameObject : any, findByValue : string){
+    localStorage.setItem(findByValue, JSON.stringify(gameObject.getSaveValues()));
+  }
 }

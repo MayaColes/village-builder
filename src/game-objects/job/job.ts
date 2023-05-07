@@ -40,6 +40,10 @@ export class Job {
         }
     }
 
+    getSaveValues() {
+        return {numberWorking: this.numberWorking, isVisible: this.isVisible}
+    }
+
     get numberWorking() { return this.numberWorking_ }
 
     get isVisible() { return this.isVisible_ }

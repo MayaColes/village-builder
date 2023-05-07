@@ -267,4 +267,30 @@ export class GameObjectsService {
       }
     }
   }
+
+  saveObjects(){
+    this.resources.forEach((resource) => {
+      this.storageService.saveObjToLocalStorage(resource, resource.name);
+    })
+
+    this.craftableResources.forEach((craftableResource) => {
+      this.storageService.saveObjToLocalStorage(craftableResource, craftableResource.name);
+    })
+
+    this.sciences.forEach((science) => {
+      this.storageService.saveObjToLocalStorage(science, science.name);
+    })
+
+    this.buildings.forEach((building) => {
+      this.storageService.saveObjToLocalStorage(building, building.name);
+    })
+
+    this.jobs.forEach((job) => {
+      this.storageService.saveObjToLocalStorage(job, job.name);
+    })
+
+    /*this.upgrades.forEach((upgrade) => {
+      this.storageService.saveObjToLocalStorage(upgrade, upgrade.name);
+    })*/
+  }
 }

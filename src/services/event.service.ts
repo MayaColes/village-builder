@@ -12,6 +12,8 @@ export class EventService {
 
   readonly ticksPerDay = this.ticksPerSecond * 2;
 
+  readonly saveInterval = this.ticksPerSecond * 15;
+
   subscription : Subscription;
 
   events : {time: number, text: string}[] = [];
@@ -26,6 +28,9 @@ export class EventService {
     this.subscription = interval(this.tickLength).subscribe(val => {
       if (val % this.ticksPerDay === (this.ticksPerDay - 1)){
         this.date++;
+      }
+      if(val % this.saveInterval === (this.saveInterval - 1)){
+        this.gameObjectService.saveObjects();
       }
       this.doDailyChecks()
     })

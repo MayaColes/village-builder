@@ -77,6 +77,10 @@ export class CraftableResource {
         this.isVisible_ = true;
     }
 
+    getSaveValues() {
+        return {amount: this.amount, isVisible: this.isVisible}
+    }
+
     get amount() { return this.amount_ }
 
     get isVisible() { return this.isVisible_ }
