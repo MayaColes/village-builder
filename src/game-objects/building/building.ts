@@ -1,8 +1,7 @@
-import { Subject } from "rxjs";
 import { BuildingBase, Effect } from "src/app/data-interfaces";
 import { CraftableResource } from "../craftable-resource/craftable-resource";
-import { Researchable } from "../researchable/researchable";
 import { Resource } from "../resource/resource";
+import { gameEventBus } from "src/utils/game-event-bus";
 
 export class Building {
     public readonly name: string;
@@ -20,13 +19,9 @@ export class Building {
     isVisible_ : boolean;
     usedResources_ : {resource: (Resource | CraftableResource), price : number}[]
 
-    public readonly subject : Subject<{effects: Effect[], amount: number}>;
-    public readonly isVisibleSubject : Subject<void>;
-
     constructor(info : BuildingBase, numberBuilt : number, 
                 numberEnabled : number, isVisible : boolean, 
-                allResources : Resource[], allCraftableResources : CraftableResource[],
-                allSciences: Researchable[] ){
+                allResources : Resource[], allCraftableResources : CraftableResource[]){
         
         this.name = info.name;
         this.increaseRatio = info.increaseRatio;
@@ -41,12 +36,12 @@ export class Building {
         this.numberEnabled_ = numberEnabled;
         this.isVisible_ = isVisible;
 
-        this.subject = new Subject<{effects: Effect[], amount: number}>();
-        this.isVisibleSubject = new Subject<void>();
-
         this.usedResources_ = [];
+        gameEventBus.on(
+            `${this.dependancyName}.researched`,
+            this.onDependencyResearched
+        );
         this.findUsedResources(allResources, allCraftableResources);
-        this.observeDependency(allSciences)
     }
 
     build(){
@@ -57,7 +52,7 @@ export class Building {
             }
             this.numberBuilt_++;
             this.numberEnabled_++;
-            this.subject.next({effects : this.effects, amount: 1});
+            gameEventBus.emit('effects.add', undefined, {effects : this.effects, amount: 1})
         }
     }
 
@@ -80,7 +75,7 @@ export class Building {
             && this.numberEnabled_ + amount <= this.numberBuilt){
 
             this.numberEnabled_ += amount;
-            this.subject.next({effects : this.effects, amount: amount});
+            gameEventBus.emit('effects.add', undefined, {effects : this.effects, amount: amount})
         }
     }
 
@@ -105,20 +100,9 @@ export class Building {
         })
     }
 
-    private observeDependency(allSciences : Researchable[]){
-        let science = allSciences.find(obj => obj.name === this.dependancyName)
-
-        if(science && this.dependancyName !== ''){
-            science.researchedSubject.subscribe(({
-                next: () => {
-                    this.isVisible_ = true;
-                    this.isVisibleSubject.next();
-                }
-            }))
-        }
-        else{
-            this.isVisible_ = true;
-        }
+    private onDependencyResearched(){
+        this.isVisible_ = true;
+        gameEventBus.emit(`building.${this.name}.visible`)
     }
 
     getSaveValues() {

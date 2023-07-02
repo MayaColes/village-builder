@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Building } from 'src/game-objects/building/building';
 import { Job } from 'src/game-objects/job/job';
 import { Researchable } from 'src/game-objects/researchable/researchable';
+import { gameEventBus } from 'src/utils/game-event-bus';
 
 @Component({
   selector: 'building-panel',
@@ -26,11 +27,10 @@ export class BuildingPanelComponent implements OnInit {
   ngOnInit(){
     this.filterVisibleBuildings()
     
-    this.buildings.forEach(building => {
-      building.isVisibleSubject.subscribe({
-        next : () => { this.filterVisibleBuildings()}
-      })
-    })
+    gameEventBus.on(
+      `building.*.visible`,
+      this.filterVisibleBuildings
+    );
   }
 
   filterVisibleBuildings(){

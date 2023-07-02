@@ -7,8 +7,8 @@ import { CraftableResource } from 'src/game-objects/craftable-resource/craftable
 import { Resource } from 'src/game-objects/resource/resource';
 import { StorageService } from './storage.service';
 import { Job } from 'src/game-objects/job/job';
-import { Subject } from 'rxjs';
 import { Researchable } from 'src/game-objects/researchable/researchable';
+import { gameEventBus } from 'src/utils/game-event-bus';
 
 @Injectable({
   providedIn: 'root'
@@ -39,15 +39,16 @@ export class GameObjectsService {
 
   water: Resource;
 
-  freeBears = 0;
-
-  freeBearsSubject : Subject<number>;
-
   constructor (private storageService : StorageService) {
-    this.freeBearsSubject = new Subject<number>();
+    gameEventBus.on(
+      `effects.add`,
+      this.addEffects.bind(this)
+    );
   }
 
   initFromLocalStorage(){
+    let freeBears = 0;
+
     resources.forEach((resource) => {
       let gameObjectInfo = localStorage.getItem(resource.name);
       let newResource = undefined;
@@ -61,7 +62,7 @@ export class GameObjectsService {
       }
 
       if(resource.name === 'Bears'){
-        this.freeBears = newResource.amount;
+        freeBears = newResource.amount;
         this.bears = newResource
       }
       else if(resource.name === 'Berries') {
@@ -102,8 +103,6 @@ export class GameObjectsService {
       this.sciences.push(newScience)
     })
 
-    this.sciences.forEach((science) => science.initDependency(this.sciences))
-
     buildings.forEach((building) => {
       let gameObjectInfo = localStorage.getItem(building.name);
       let newBuilding = null;
@@ -112,15 +111,11 @@ export class GameObjectsService {
         let gameObjectValues = JSON.parse(gameObjectInfo);
         newBuilding = new Building(building, gameObjectValues.numberBuilt, 
                                   gameObjectValues.numberEnabled, gameObjectValues.isVisible,
-                                  this.resources, this.craftableResources, this.sciences);
+                                  this.resources, this.craftableResources);
       }
       else{
-        newBuilding = new Building(building, 0, 0, false, this.resources, this.craftableResources, this.sciences);
+        newBuilding = new Building(building, 0, 0, false, this.resources, this.craftableResources);
       }
-      
-      newBuilding.subject.subscribe(({
-        next: (values : any) => this.addEffects(values.effects, values.amount)
-      }))
 
       this.buildings.push(newBuilding)
     })
@@ -131,25 +126,17 @@ export class GameObjectsService {
 
       if(gameObjectInfo){
         let gameObjectValues = JSON.parse(gameObjectInfo);
-        newJob = new Job(job, gameObjectValues.numberWorking, gameObjectValues.isVisible, this.freeBearsSubject);
-        this.freeBears -= gameObjectValues.numberWorking;
+        newJob = new Job(job, gameObjectValues.numberWorking, gameObjectValues.isVisible);
+        freeBears -= gameObjectValues.numberWorking;
       }
       else {
-        newJob = new Job(job, 0, false, this.freeBearsSubject);
+        newJob = new Job(job, 0, false);
       }
-
-      newJob.freeBearsChanges.subscribe(({
-        next: (freeBears) => this.updateFreeBears(freeBears)
-      }))
-
-      newJob.effectsSubject.subscribe({
-        next: (effects) => this.addEffects(effects.effects, effects.amount)
-      })
       
       this.jobs.push(newJob)
     })
 
-    this.freeBearsSubject.next(this.freeBears);
+    Job.freeBears = freeBears;
 
     this.upgrades.forEach((upgrade) => {
       let didInit = this.storageService.initObjFromLocalStorage(upgrade, upgrade.name);
@@ -177,27 +164,19 @@ export class GameObjectsService {
     })
   }
 
-  updateFreeBears(freeBears : number){
-    this.freeBears = freeBears;
-    this.freeBearsSubject.next(this.freeBears);
-  }
-
   addBear() {
-    this.freeBears++;
     this.bears.changeAmount(1);
-    this.freeBearsSubject.next(this.freeBears);
     this.berries.changeConsumption(-4);
     this.water.changeConsumption(-0.5);
+    Job.freeBears++
   }
 
   removeBear(){
     if(!this.bears.amount) return;
 
-    if(this.freeBears > 0){
-      this.freeBears--;
-      this.freeBearsSubject.next(this.freeBears);
-    }
-    else{
+    Job.freeBears--;
+
+    if(Job.freeBears == 0){
       for(let job of this.jobs){
         if(job.numberWorking > 0){
           job.changeWorking(-1);
@@ -210,7 +189,8 @@ export class GameObjectsService {
     this.water.changeConsumption(0.5);
   }
 
-  addEffects(effects : Effect[], timesApplied : number = 1){
+  addEffects(event : {effects: Effect[], amount: number}){
+    const {effects, amount : timesApplied} = event;
     for(let effect of effects){
       if(effect.objectType === 'resource'){
         let affectedGameObject = this.resources.find(obj => {
