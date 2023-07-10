@@ -51,30 +51,6 @@ export class InitializationHelper {
     }
 
     static calculateResourceProduction(resources : Resource[], buildings : Building[], jobs : Job[]){
-        buildings.forEach((building) => {
-            building.effects.forEach((effect) => {
-                if(effect.type === 'production'){
-                    let affectedResource = resources.find((obj) => {
-                        return obj.name === effect.object;
-                    })
-                    if(affectedResource){
-                        let buildingProduction = effect.amount;
-                        if(effect.bonus){
-                            buildingProduction += effect.amount * effect.bonus;
-                        }
-                        buildingProduction *= building.isEnablable ? building.numberEnabled : building.numberBuilt;
-
-                        if(buildingProduction > 0){
-                            affectedResource.changeProduction(buildingProduction);
-                        }
-                        else{
-                            affectedResource.changeConsumption(buildingProduction);
-                        }
-                    }
-                }
-            })
-        })
-
         jobs.forEach((job) => {
             job.effects.forEach((effect) => {
                 if(effect.type === 'production'){

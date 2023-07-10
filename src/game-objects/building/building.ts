@@ -41,6 +41,11 @@ export class Building {
             `${this.dependancyName}.researched`,
             this.onDependencyResearched
         );
+        gameEventBus.emit(
+            'effects.add',
+            undefined, 
+            {effects : this.effects, amount: this.isEnablable ? numberEnabled : numberBuilt}
+        )
         this.findUsedResources(allResources, allCraftableResources);
     }
 
@@ -95,7 +100,10 @@ export class Building {
             }
 
             if(resource){
-                this.usedResources_.push({resource: resource, price: required.price});
+                let price = required.price;
+                for(let i = 0; i < this.numberBuilt; i++) price = price * this.increaseRatio;
+                
+                this.usedResources_.push({resource, price});
             }
         })
     }

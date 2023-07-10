@@ -156,6 +156,8 @@ export class GameObjectsService {
     InitializationHelper.updateEffectBonuses(this.buildings, this.jobs);
 
     InitializationHelper.calculateResourceProduction(this.resources, this.buildings, this.jobs);
+console.log(this.bears.amount)
+    this.addBear(this.bears.amount)
   };
 
   produceResources(ticksPerSecond : number){
@@ -164,11 +166,11 @@ export class GameObjectsService {
     })
   }
 
-  addBear() {
-    this.bears.changeAmount(1);
-    this.berries.changeConsumption(-4);
-    this.water.changeConsumption(-0.5);
-    Job.freeBears++
+  addBear(numBears = 1) {
+    this.bears.changeAmount(numBears);
+    this.berries.changeConsumption(-4 * numBears);
+    this.water.changeConsumption(-0.5 * numBears);
+    Job.freeBears += numBears;
   }
 
   removeBear(){
