@@ -3,7 +3,7 @@ export interface BuildingBase {
     increaseRatio: number,
     toolTipText: string,
     secondaryToolTip: string,
-    effects: Effect[],
+    effects: EffectBase[],
     isEnablable: boolean,
     dependancyName: string,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
@@ -48,7 +48,7 @@ export interface CraftableResourceBase {
 export interface JobBase {
     name: string,
     toolTipText: string,
-    effects: Effect[]
+    effects: EffectBase[]
 }
 
 export interface ResearchableBase {
@@ -62,7 +62,7 @@ export interface Upgrade {
     name: string,
     dependancy: number,
     toolTipText: string,
-    effects: Effect[],
+    effects: EffectBase[],
     hasScienceDependancy: boolean,
     resourcesRequired: {name: string, price: number, isCraftable: boolean}[],
     isVisible?: boolean,
@@ -74,12 +74,12 @@ export interface Spell {
     toolTipText: string,
     dependancy: number,
     isEnablable: boolean,
-    effects: Effect[],
+    effects: EffectBase[],
     isEnabled?: boolean,
     isVisible?: boolean
 }
 
-export interface Effect {
+export interface EffectBase {
     type: string,
     amount: number,
     objectType: string,

@@ -1,7 +1,7 @@
 import { Building } from "src/game-objects/building/building";
 import { Job } from "src/game-objects/job/job";
 import { Resource } from "src/game-objects/resource/resource";
-import { Effect, Upgrade } from "../app/data-interfaces";
+import { EffectBase, Upgrade } from "../app/data-interfaces";
 
 export class InitializationHelper {
     // Adds production and production bonus effects from researched upgrades to jobs and buildings
@@ -78,8 +78,8 @@ export class InitializationHelper {
     }
 
     // updates an effect in affectedGameObject using updatingEffect, or adds a new effect is there is no matching one
-    private static addOrUpdateEffect(affectedGameObject : any, updatingEffect : Effect){
-        let affectedGameObjectEffect = affectedGameObject.effects.find((eff : Effect) => {
+    private static addOrUpdateEffect(affectedGameObject : any, updatingEffect : EffectBase){
+        let affectedGameObjectEffect = affectedGameObject.effects.find((eff : EffectBase) => {
             return eff.object === updatingEffect.resource;
         })
 

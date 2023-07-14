@@ -1,4 +1,5 @@
 import { ResourceBase } from "src/app/data-interfaces";
+import { gameEventBus } from "src/utils/game-event-bus";
 
 export class Resource {
     public readonly name: string;
@@ -24,7 +25,21 @@ export class Resource {
     }
 
     addCurrentProduction(tickPerSecond : number){
-        this.changeAmount(this.totalProduction/ tickPerSecond)
+        this.checkDisableDependent(true)
+        this.changeAmount(this.totalProduction / tickPerSecond)
+    }
+
+    checkDisableDependent(strict: boolean){
+        if(!strict && this.amount === 0 || this.amount !== 0 && this.amount + this.totalProduction <= 0){
+            gameEventBus.emit(
+                `${this.name}.disableDependent`
+            )
+        }
+        else if(!strict && this.amount !== 0 || this.amount === 0 && this.amount + this.totalProduction > 0){
+            gameEventBus.emit(
+                `${this.name}.enableDependent`
+            )
+        }
     }
 
     changeAmount(amount : number){
@@ -48,6 +63,7 @@ export class Resource {
     }
 
     changeProduction(amount : number){
+        this.checkDisableDependent(false)
         if(this.currentProduction_ + amount < 0){
             this.currentProduction_ = 0;
         }
@@ -57,6 +73,7 @@ export class Resource {
     }
 
     changeConsumption(amount : number){
+        this.checkDisableDependent(false)
         if(this.currentConsumption_ + amount > 0){
             this.currentConsumption_ = 0;
         }

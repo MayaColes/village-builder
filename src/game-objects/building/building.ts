@@ -1,14 +1,14 @@
-import { BuildingBase, Effect } from "src/app/data-interfaces";
+import { BuildingBase, EffectBase } from "src/app/data-interfaces";
 import { CraftableResource } from "../craftable-resource/craftable-resource";
 import { Resource } from "../resource/resource";
 import { gameEventBus } from "src/utils/game-event-bus";
+import { Effect } from "../effect/effect";
 
 export class Building {
     public readonly name: string;
     public readonly increaseRatio: number
     public readonly toolTipText: string
     public readonly secondaryToolTip: string
-    public readonly effects: Effect[]
     public readonly isEnablable: boolean
     public readonly hasScienceDependancy: boolean
     public readonly dependancyName: string;
@@ -18,6 +18,8 @@ export class Building {
     numberEnabled_ : number;
     isVisible_ : boolean;
     usedResources_ : {resource: (Resource | CraftableResource), price : number}[]
+    effects_ : Effect[]
+    effectDependencies_ : string[]
 
     constructor(info : BuildingBase, numberBuilt : number, 
                 numberEnabled : number, isVisible : boolean, 
@@ -27,7 +29,6 @@ export class Building {
         this.increaseRatio = info.increaseRatio;
         this.toolTipText = info.toolTipText;
         this.secondaryToolTip = info.secondaryToolTip;
-        this.effects = info.effects;
         this.isEnablable = info.isEnablable;
         this.resourcesRequired = info.resourcesRequired;
         this.dependancyName = info.dependancyName;
@@ -35,8 +36,11 @@ export class Building {
         this.numberBuilt_ = numberBuilt;
         this.numberEnabled_ = numberEnabled;
         this.isVisible_ = isVisible;
-
         this.usedResources_ = [];
+
+        this.initializeEffectDependencies(info.effects)
+        this.initializeEffects(info.effects);
+
         gameEventBus.on(
             `${this.dependancyName}.researched`,
             this.onDependencyResearched
@@ -44,7 +48,7 @@ export class Building {
         gameEventBus.emit(
             'effects.add',
             undefined, 
-            {effects : this.effects, amount: this.isEnablable ? numberEnabled : numberBuilt}
+            {effects : this.effects_, amount: this.isEnablable ? numberEnabled : numberBuilt}
         )
         this.findUsedResources(allResources, allCraftableResources);
     }
@@ -57,7 +61,7 @@ export class Building {
             }
             this.numberBuilt_++;
             this.numberEnabled_++;
-            gameEventBus.emit('effects.add', undefined, {effects : this.effects, amount: 1})
+            gameEventBus.emit('effects.add', undefined, {effects : this.effects_, amount: 1})
         }
     }
 
@@ -80,7 +84,7 @@ export class Building {
             && this.numberEnabled_ + amount <= this.numberBuilt){
 
             this.numberEnabled_ += amount;
-            gameEventBus.emit('effects.add', undefined, {effects : this.effects, amount: amount})
+            gameEventBus.emit('effects.add', undefined, {effects : this.effects_, amount: amount})
         }
     }
 
@@ -102,9 +106,35 @@ export class Building {
             if(resource){
                 let price = required.price;
                 for(let i = 0; i < this.numberBuilt; i++) price = price * this.increaseRatio;
-                
+
                 this.usedResources_.push({resource, price});
             }
+        })
+    }
+
+    private initializeEffectDependencies(effects: EffectBase[]){
+        this.effectDependencies_ = effects.filter((dep) => {
+            return dep.objectType === 'resource' && dep.type === 'production' && dep.amount < 0
+        }).map((effect) => {
+            return effect.object
+        })
+    }
+
+    private initializeEffects(effects: EffectBase[]){
+        this.effects_ = []
+        effects.forEach((effect) => {
+            const newEffect = new Effect(effect, this.effectDependencies_)
+            this.effects_.push(newEffect)
+            
+            newEffect.subject.subscribe({
+                next: (disabled: boolean) => {
+                    gameEventBus.emit(
+                        'effects.add',
+                        undefined,
+                        {effects: [newEffect], amount: disabled ? -this.numberEnabled : this.numberEnabled, ignoreDisabled: true}
+                    )
+                }
+            })
         })
     }
 
@@ -113,9 +143,15 @@ export class Building {
         gameEventBus.emit(`building.${this.name}.visible`)
     }
 
+    addEffect(effect: EffectBase) {
+        this.effects_.push(new Effect(effect, this.effectDependencies_))
+    }
+
     getSaveValues() {
         return {numberBuilt: this.numberBuilt, numberEnabled: this.numberEnabled, isVisible: this.isVisible}
     }
+
+    get effects() : Effect[] { return this.effects_ }
 
     get numberBuilt() : number { return this.numberBuilt_ }
 

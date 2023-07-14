@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Effect } from 'src/app/data-interfaces';
+import { Effect } from 'src/game-objects/effect/effect';
 
 @Component({
   selector: 'tooltip-effect-info',

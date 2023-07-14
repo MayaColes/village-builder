@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Effect } from 'src/app/data-interfaces';
 import { resources, buildings, craftableResources, jobs, sciences, upgrades, magic, spells, civilizations } from 'src/app/game-object-data';
 import { InitializationHelper } from 'src/services/initialization-helper';
 import { Building } from 'src/game-objects/building/building';
@@ -9,6 +8,7 @@ import { StorageService } from './storage.service';
 import { Job } from 'src/game-objects/job/job';
 import { Researchable } from 'src/game-objects/researchable/researchable';
 import { gameEventBus } from 'src/utils/game-event-bus';
+import { Effect } from 'src/game-objects/effect/effect';
 
 @Injectable({
   providedIn: 'root'
@@ -156,7 +156,7 @@ export class GameObjectsService {
     InitializationHelper.updateEffectBonuses(this.buildings, this.jobs);
 
     InitializationHelper.calculateResourceProduction(this.resources, this.buildings, this.jobs);
-console.log(this.bears.amount)
+
     this.addBear(this.bears.amount)
   };
 
@@ -191,9 +191,11 @@ console.log(this.bears.amount)
     this.water.changeConsumption(0.5);
   }
 
-  addEffects(event : {effects: Effect[], amount: number}){
-    const {effects, amount : timesApplied} = event;
+  addEffects(event : {effects: Effect[], amount: number, ignoreDisabled?: boolean}){
+    const {effects, amount : timesApplied, ignoreDisabled} = event;
     for(let effect of effects){
+      if(effect.disabled && !ignoreDisabled) continue;
+
       if(effect.objectType === 'resource'){
         let affectedGameObject = this.resources.find(obj => {
           return obj.name === effect.object
@@ -227,7 +229,7 @@ console.log(this.bears.amount)
         })
 
         if(!affectedGameObjectEffect){
-          affectedGameObject.effects.push({
+          affectedGameObject.addEffect({
               type: "production",
               amount: effect.type === 'bonus' ? 0 : effect.amount * timesApplied,
               objectType: 'resource',
@@ -241,7 +243,7 @@ console.log(this.bears.amount)
           }
           else if(effect.type === 'bonus'){
             if(!affectedGameObjectEffect.bonus){
-                affectedGameObjectEffect['bonus'] = 0;
+                affectedGameObjectEffect.bonus = 0;
             }
             affectedGameObjectEffect.amount += effect.amount * timesApplied;
           }
